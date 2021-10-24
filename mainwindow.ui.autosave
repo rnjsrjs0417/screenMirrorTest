@@ -459,8 +459,10 @@
     </property>
     <property name="font">
      <font>
-      <family>맑은 고딕</family>
+      <family>Tahoma</family>
       <pointsize>9</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
      </font>
     </property>
     <property name="mouseTracking">
