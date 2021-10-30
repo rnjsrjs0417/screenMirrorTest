@@ -3,6 +3,7 @@
 #include <QDebug>
 #include <QDateTime>
 #include <QMouseEvent>
+#include <windows.h>
 
 #define X_DELTA_CRIT 300
 
@@ -40,7 +41,11 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-
+void MainWindow::init_hiding()
+{
+    QObject().thread()->usleep(1000*1000*5);
+    qDebug() << " 5 sec delayed ";
+}
 
 void MainWindow::myfunction() // Operates in every 1 sec
 {
@@ -65,8 +70,8 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event)
 {
     if(this->mouseStat == true)
     {
-        ui->label_date_time->move(cursor().pos().x()-mouseClickPoint,clock_yPos); //
-        ui->widget_calendar->move(cursor().pos().x()-mouseClickPoint,cal_yPos);
+        ui->label_date_time->move(clock_xPos + cursor().pos().x()-mouseClickPoint,clock_yPos); //
+        ui->widget_calendar->move(cal_xPos + cursor().pos().x()-mouseClickPoint,cal_yPos);
     }
 
 

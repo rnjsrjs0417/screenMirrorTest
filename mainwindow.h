@@ -40,10 +40,12 @@ protected:
 
 public slots:
     void myfunction();
+    void init_hiding();
 
 private:
     //void configureSpinBox(QSpinBox *spinBox,int min,int max) const;
     void onMouseEvent(const QPoint &pos);
+
     Ui::MainWindow *ui;
     QTimer *timer;
 

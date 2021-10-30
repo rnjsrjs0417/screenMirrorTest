@@ -27,6 +27,5 @@ void initscreen::on_pushButton_clicked()
     screen = new MainWindow(this);
     screen->resize(1080,1920);
     screen ->show();
-
 }
 
