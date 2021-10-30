@@ -2,7 +2,6 @@
 #include "mainwindow.h"
 
 #include "ui_initscreen.h"
-#include<QmessageBox>
 #include<QPixmap>
 #include<QDebug>
 #include<QDateTime>

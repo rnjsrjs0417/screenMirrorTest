@@ -15,6 +15,16 @@ class QSpinBox;
 
 class MainWindow : public QMainWindow
 {
+    bool mouseStat;                 //
+    int mouseClickPoint, xDelta;    //
+
+    int cursor_xPos, cursor_yPos;//Curor value
+
+    //Initial Postion values of Widgets
+    int cal_xPos, cal_yPos;
+    int clock_xPos,clock_yPos;
+
+
     Q_OBJECT
 
 public:
@@ -32,8 +42,8 @@ public slots:
     void myfunction();
 
 private:
-    void configureSpinBox(QSpinBox *spinBox,int min,int max) const;
-    void onMouseEvent(const QString &eventName, const QPoint &pos);
+    //void configureSpinBox(QSpinBox *spinBox,int min,int max) const;
+    void onMouseEvent(const QPoint &pos);
     Ui::MainWindow *ui;
     QTimer *timer;
 
