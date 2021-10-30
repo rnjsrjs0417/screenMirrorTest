@@ -24,7 +24,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT (myfunction()));
-    timer->start(1000); // 1초마다 타이밍을 재야됨 , 현재시간일단 띠용받아와서 그떄부터 잼
+    timer->start(1000); // countset by 1 sec
 
 }
 
@@ -51,7 +51,7 @@ void MainWindow::configureSpinBox(QSpinBox *spinBox, int min, int max) const
 
 void MainWindow::mouseDoubleClickEvent(QMouseEvent *event)
 {
-    //ui->ESTADOLINEEDIT->setText("DoubleClick"); EST..인 라벨에 텍스트 부여하는 이벤트
+    //ui->ESTADOLINEEDIT->setText("DoubleClick"); debug
     qDebug() << "doubleclick";
    onMouseEvent("DoubleClick",event->pos());
    event->accept();
