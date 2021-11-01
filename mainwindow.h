@@ -20,16 +20,16 @@ class QSpinBox;
 class MainWindow : public QMainWindow
 {
     //mouse event values
-    bool mouseStat;
-    int mouseClickPoint, xDelta;
+    bool mouseStat, page1_flag;
+    int mouseClickPoint; // remeber only x point
 
     //Curor value
     int cursor_xPos, cursor_yPos;
 
     //Initial Postion values of Widgets
-    int clock_xPos,clock_yPos;
-    int cal_xPos, cal_yPos;
-    int date_xPos, date_yPos;
+//    int clock_xPos,clock_yPos;
+//    int cal_xPos, cal_yPos;
+//    int date_xPos, date_yPos;
 
     //time values
     QString localTime;
@@ -52,11 +52,14 @@ protected:
 
 public slots:
     void myfunction();
-    void init_hiding();
+
 
 private:
     //void configureSpinBox(QSpinBox *spinBox,int min,int max) const;
     void onMouseEvent(const QPoint &pos);
+    void init_hiding();
+    void page1_call();
+    void page2_call();
 
     Ui::MainWindow *ui;
     QTimer *timer;
