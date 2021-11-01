@@ -401,7 +401,7 @@
      </property>
      <property name="geometry">
       <rect>
-       <x>40</x>
+       <x>20</x>
        <y>450</y>
        <width>341</width>
        <height>241</height>
@@ -1276,6 +1276,119 @@ font: 9pt &quot;HY견고딕&quot;;</string>
      </property>
      <property name="text">
       <string>70mmHg</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_hello">
+     <property name="geometry">
+      <rect>
+       <x>430</x>
+       <y>160</y>
+       <width>331</width>
+       <height>191</height>
+      </rect>
+     </property>
+     <property name="palette">
+      <palette>
+       <active>
+        <colorrole role="WindowText">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>255</red>
+           <green>255</green>
+           <blue>255</blue>
+          </color>
+         </brush>
+        </colorrole>
+       </active>
+       <inactive>
+        <colorrole role="WindowText">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>255</red>
+           <green>255</green>
+           <blue>255</blue>
+          </color>
+         </brush>
+        </colorrole>
+       </inactive>
+       <disabled>
+        <colorrole role="WindowText">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>120</red>
+           <green>120</green>
+           <blue>120</blue>
+          </color>
+         </brush>
+        </colorrole>
+       </disabled>
+      </palette>
+     </property>
+     <property name="font">
+      <font>
+       <family>HY헤드라인M</family>
+       <pointsize>77</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>HOLLA</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_black">
+     <property name="geometry">
+      <rect>
+       <x>330</x>
+       <y>440</y>
+       <width>81</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>HY헤드라인M</family>
+       <pointsize>11</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_black3">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>430</y>
+       <width>71</width>
+       <height>261</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>HY헤드라인M</family>
+       <pointsize>11</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_s">
+     <property name="geometry">
+      <rect>
+       <x>181</x>
+       <y>460</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
      </property>
     </widget>
    </widget>

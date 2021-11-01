@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QWindow>
+#include <QGraphicsOpacityEffect>
+#include <QPropertyAnimation>
 
 #define X_DELTA_CRIT 300
 
@@ -9,7 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-   setWindowState(Qt::WindowFullScreen);
+    //setWindowState(Qt::WindowFullScreen);
     // SAVE init postions of widgets
 //    cal_xPos = ui->widget_calendar->pos().x();
 //    cal_yPos = ui->widget_calendar->pos().y();
@@ -30,8 +32,30 @@ MainWindow::MainWindow(QWidget *parent)
     connect(timer, SIGNAL(timeout()), this, SLOT (myfunction()));
     timer->start(1000); // countset by 1 sec
 
+   /* QGraphicsOpacityEffect *eff = new QGraphicsOpacityEffect(this);
+    ui->label_hello->setGraphicsEffect(eff);
+    QPropertyAnimation *a = new QPropertyAnimation(eff,"opacity");
+  //  ui->label_hello->setGraphicsEffect(eff);
+    a->setDuration(7777);
+    a->setStartValue(0);
+    a->setEndValue(1);
+    a->setEasingCurve(QEasingCurve::InBack);
+    a->start(QPropertyAnimation::DeleteWhenStopped);
+*/
 
+    // now implement a slot called hideThisWidget() to do
+    // things like hide any background dimmer, etc.
 
+    QGraphicsOpacityEffect *efff = new QGraphicsOpacityEffect(this);
+    ui->label_hello->setGraphicsEffect(efff);
+    QPropertyAnimation *aa = new QPropertyAnimation(efff,"opacity");
+    //ui->label_hello->setGraphicsEffect(efff);
+    aa->setDuration(7777);
+    aa->setStartValue(1);
+    aa->setEndValue(0);
+    aa->setEasingCurve(QEasingCurve::OutBack);
+    aa->start(QPropertyAnimation::DeleteWhenStopped);
+    connect(aa,SIGNAL(finished()),this,SLOT(hideThisWidget()));
 
     //date exp
     //localTime = QDateTime::currentDateTime().toString(Qt::TextDate);
@@ -68,6 +92,14 @@ MainWindow::MainWindow(QWidget *parent)
     QPixmap pix5("C:/Users/kwang/Desktop/o2.jpg");
     ui->label_o2->setPixmap(pix5.scaled(w,h,Qt::KeepAspectRatio));
     ui->label_o2->setScaledContents(true);
+
+
+    QPixmap pix6("C:/Users/kwang/Desktop/bl.png");
+    ui->label_black->setPixmap(pix6.scaled(w,h,Qt::KeepAspectRatio));
+
+    ui->label_s->setPixmap(pix6.scaled(w,h,Qt::KeepAspectRatio));
+    ui->label_black3->setPixmap(pix6.scaled(w,h,Qt::KeepAspectRatio));
+    ui->label_black3->setScaledContents(true);
 
 
 }
