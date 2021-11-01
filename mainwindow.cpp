@@ -37,12 +37,37 @@ MainWindow::MainWindow(QWidget *parent)
     //localTime = QDateTime::currentDateTime().toString(Qt::TextDate);
     localTime = QDateTime::currentDateTime().toString("yyyy.MM.dd  ddd");
     ui->label_date->setText(localTime);
+    QFont font = ui->label_date->font();
+    font.setPointSize(24);
+    ui->label_date->setFont(font);
+
 
     time = QTime::currentTime();
     time_text = time.toString("AP hh : mm ");
     ui->label_date_time->setText(time_text);
+    QFont font2 = ui->label_date_time->font();
+    font2.setPointSize(48);
+    ui->label_date_time->setFont(font2);
 
 
+
+
+    QPixmap pix("C:/Users/kwang/Desktop/weather.png");
+    int w=ui->label_pic->width();
+    int h=ui->label_pic->height();
+    ui->label_pic->setPixmap(pix.scaled(w,h,Qt::KeepAspectRatio));
+
+    QPixmap pix3("C:/Users/kwang/Desktop/heart.jpg");
+    ui->label_pulse->setPixmap(pix3.scaled(w,h,Qt::KeepAspectRatio));
+    ui->label_pulse->setScaledContents(true);
+
+    QPixmap pix4("C:/Users/kwang/Desktop/pre.jpg");
+    ui->label_pre->setPixmap(pix4.scaled(w,h,Qt::KeepAspectRatio));
+    ui->label_pre->setScaledContents(true);
+
+    QPixmap pix5("C:/Users/kwang/Desktop/o2.jpg");
+    ui->label_o2->setPixmap(pix5.scaled(w,h,Qt::KeepAspectRatio));
+    ui->label_o2->setScaledContents(true);
 
 
 }
