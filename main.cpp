@@ -9,7 +9,6 @@ int main(int argc, char *argv[])
     a.setStyle("fusion");
     //MainWindow w;
     initscreen w;
-
     //w.resize(1080,1920);
     w.show();
 

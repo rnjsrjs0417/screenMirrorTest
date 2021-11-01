@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-
+#include <QWindow>
 
 #define X_DELTA_CRIT 300
 
@@ -9,7 +9,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
+   setWindowState(Qt::WindowFullScreen);
     // SAVE init postions of widgets
 //    cal_xPos = ui->widget_calendar->pos().x();
 //    cal_yPos = ui->widget_calendar->pos().y();
