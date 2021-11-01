@@ -81,7 +81,7 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event)
 {
     if(this->mouseStat == true) // move widgets with mouse events
     {
-        ui->centralwidget->move(cursor().pos().x()-mouseClickPoint,0);
+        ui->page1->move(cursor().pos().x()-mouseClickPoint,0);
         //ui->label_date_time->move(clock_xPos + cursor().pos().x()-mouseClickPoint,clock_yPos); //
         //ui->widget_calendar->move(cal_xPos + cursor().pos().x()-mouseClickPoint,cal_yPos);
         //ui->label_date->move(date_xPos + cursor().pos().x()-mouseClickPoint,date_yPos);
