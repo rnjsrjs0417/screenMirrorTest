@@ -4,6 +4,10 @@
 #include <QMainWindow>
 #include <QWidget>
 #include <QTimer>
+#include <QDebug>
+#include <QDateTime>
+#include <QMouseEvent>
+#include <windows.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -15,14 +19,22 @@ class QSpinBox;
 
 class MainWindow : public QMainWindow
 {
-    bool mouseStat;                 //
-    int mouseClickPoint, xDelta;    //
+    //mouse event values
+    bool mouseStat;
+    int mouseClickPoint, xDelta;
 
-    int cursor_xPos, cursor_yPos;//Curor value
+    //Curor value
+    int cursor_xPos, cursor_yPos;
 
     //Initial Postion values of Widgets
-    int cal_xPos, cal_yPos;
     int clock_xPos,clock_yPos;
+    int cal_xPos, cal_yPos;
+    int date_xPos, date_yPos;
+
+    //time values
+    QString localTime;
+    QString time_text;
+    QTime time;
 
 
     Q_OBJECT

@@ -138,7 +138,7 @@
    <property name="enabled">
     <bool>true</bool>
    </property>
-   <widget class="QWidget" name="centralwidget" native="true">
+   <widget class="QWidget" name="page1" native="true">
     <property name="enabled">
      <bool>true</bool>
     </property>
@@ -715,6 +715,16 @@
       <bool>true</bool>
      </property>
     </widget>
+   </widget>
+   <widget class="QWidget" name="page2" native="true">
+    <property name="geometry">
+     <rect>
+      <x>1080</x>
+      <y>0</y>
+      <width>1080</width>
+      <height>1920</height>
+     </rect>
+    </property>
    </widget>
   </widget>
  </widget>
