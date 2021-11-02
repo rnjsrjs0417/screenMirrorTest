@@ -212,8 +212,8 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>-30</y>
+      <x>0</x>
+      <y>0</y>
       <width>1080</width>
       <height>1920</height>
      </rect>
@@ -1326,12 +1326,13 @@ font: 9pt &quot;HY견고딕&quot;;</string>
      </property>
      <property name="font">
       <font>
-       <family>HY헤드라인M</family>
+       <family>Segoe Script</family>
        <pointsize>77</pointsize>
+       <italic>false</italic>
       </font>
      </property>
      <property name="text">
-      <string>HOLLA</string>
+      <string>HOLA</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_black">

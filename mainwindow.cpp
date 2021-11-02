@@ -11,7 +11,8 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    //setWindowState(Qt::WindowFullScreen);
+    setWindowState(Qt::WindowFullScreen);
+
     // SAVE init postions of widgets
 //    cal_xPos = ui->widget_calendar->pos().x();
 //    cal_yPos = ui->widget_calendar->pos().y();
@@ -149,10 +150,18 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event)
     if(this->mouseStat == true) // move widgets with mouse events
     {
         if(page1_flag == true)
-            ui->widgets1->move(cursor().pos().x()-mouseClickPoint,0);
+        {
+            //ui->widgets1->move(cursor().pos().x()-mouseClickPoint,0);
+            ui->page1->move(cursor().pos().x()-mouseClickPoint,0);
+            ui->page2->move(1080+cursor().pos().x()-mouseClickPoint,0);
+        }
 
         else if(page1_flag == false)
-            ui->widgets1->move(cursor().pos().x()-mouseClickPoint-1080,0);
+        {
+            //ui->widgets1->move(cursor().pos().x()-mouseClickPoint-1080,0);
+            ui->page1->move(cursor().pos().x()-mouseClickPoint-1080,0);
+            ui->page2->move(cursor().pos().x()-mouseClickPoint,0);
+        }
 
         //ui->label_date_time->move(clock_xPos + cursor().pos().x()-mouseClickPoint,clock_yPos); //
         //ui->widget_calendar->move(cal_xPos + cursor().pos().x()-mouseClickPoint,cal_yPos);
@@ -191,33 +200,42 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *event)
    {
        if(deltaX < -500)
        {
+            ui->page1->move(-1080,0);
+            ui->page2->move(0,0);
 
-            ui->widgets1->move(-1080,0);
+            //ui->widgets1->move(-1080,0);
             page1_flag = false;
             qDebug()<< "page1 -> page2 Accept";
             qDebug()<< " status :  " << page1_flag;
        }
        else
        {
+           ui->page1->move(0,0);
+           ui->page2->move(1080,0);
+
            qDebug()<< "page1 -> page2 Deniied ! ";
            qDebug()<< " status :  " << page1_flag;
-           ui->widgets1->move(0,0);
+           //ui->widgets1->move(0,0);
        }
     }
    else
    {
        if(deltaX > 500)
        {
-            ui->widgets1->move(0,0);
+            ui->page1->move(0,0);
+            ui->page2->move(1080,0);
+            // ui->widgets1->move(0,0);
             page1_flag = true;
             qDebug()<< "page2 -> page1 Accept";
             qDebug()<< " status :  " << page1_flag;
        }
        else
        {
+           ui->page1->move(-1080,0);
+           ui->page2->move(0,0);
            qDebug()<< "page2 -> page1 Deniied ! ";
            qDebug()<< " status :  " << page1_flag;
-           ui->widgets1->move(-1080,0);
+           //ui->widgets1->move(-1080,0);
        }
    }
 
