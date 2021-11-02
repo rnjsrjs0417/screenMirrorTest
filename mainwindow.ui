@@ -401,7 +401,7 @@
      </property>
      <property name="geometry">
       <rect>
-       <x>-50</x>
+       <x>0</x>
        <y>450</y>
        <width>341</width>
        <height>241</height>
@@ -1373,8 +1373,8 @@ font: 9pt &quot;HY견고딕&quot;;</string>
     <widget class="QLabel" name="label_black3">
      <property name="geometry">
       <rect>
-       <x>430</x>
-       <y>390</y>
+       <x>-30</x>
+       <y>440</y>
        <width>71</width>
        <height>261</height>
       </rect>
@@ -1392,6 +1392,22 @@ font: 9pt &quot;HY견고딕&quot;;</string>
       <string/>
      </property>
     </widget>
+    <zorder>label_date_time</zorder>
+    <zorder>label_date</zorder>
+    <zorder>widget_calendar</zorder>
+    <zorder>label_pic</zorder>
+    <zorder>label_pulse</zorder>
+    <zorder>label_6</zorder>
+    <zorder>label_7</zorder>
+    <zorder>label_o2</zorder>
+    <zorder>label_2</zorder>
+    <zorder>label_3</zorder>
+    <zorder>label_pre</zorder>
+    <zorder>label_5</zorder>
+    <zorder>label_hello</zorder>
+    <zorder>label_s</zorder>
+    <zorder>label_black3</zorder>
+    <zorder>label_black</zorder>
    </widget>
   </widget>
  </widget>
