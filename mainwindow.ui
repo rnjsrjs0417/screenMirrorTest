@@ -402,10 +402,14 @@
      <property name="geometry">
       <rect>
 <<<<<<< HEAD
+<<<<<<< HEAD
        <x>0</x>
 =======
        <x>-20</x>
 >>>>>>> 85daf3f263a972466635ea6749654f51e94ae588
+=======
+       <x>-50</x>
+>>>>>>> parent of 85daf3f (Add files via upload)
        <y>450</y>
        <width>341</width>
        <height>241</height>
@@ -813,7 +817,7 @@
      <property name="geometry">
       <rect>
        <x>30</x>
-       <y>300</y>
+       <y>288</y>
        <width>41</width>
        <height>41</height>
       </rect>
@@ -1110,7 +1114,7 @@ font: 9pt &quot;HY견고딕&quot;;</string>
      <property name="geometry">
       <rect>
        <x>170</x>
-       <y>300</y>
+       <y>288</y>
        <width>41</width>
        <height>41</height>
       </rect>
@@ -1123,7 +1127,7 @@ font: 9pt &quot;HY견고딕&quot;;</string>
      <property name="geometry">
       <rect>
        <x>40</x>
-       <y>360</y>
+       <y>350</y>
        <width>60</width>
        <height>31</height>
       </rect>
@@ -1165,12 +1169,6 @@ font: 9pt &quot;HY견고딕&quot;;</string>
        </disabled>
       </palette>
      </property>
-     <property name="font">
-      <font>
-       <family>HY헤드라인M</family>
-       <pointsize>10</pointsize>
-      </font>
-     </property>
      <property name="text">
       <string>71회</string>
      </property>
@@ -1179,7 +1177,7 @@ font: 9pt &quot;HY견고딕&quot;;</string>
      <property name="geometry">
       <rect>
        <x>178</x>
-       <y>360</y>
+       <y>350</y>
        <width>64</width>
        <height>31</height>
       </rect>
@@ -1221,12 +1219,6 @@ font: 9pt &quot;HY견고딕&quot;;</string>
        </disabled>
       </palette>
      </property>
-     <property name="font">
-      <font>
-       <family>HY헤드라인M</family>
-       <pointsize>10</pointsize>
-      </font>
-     </property>
      <property name="text">
       <string>96%</string>
      </property>
@@ -1235,7 +1227,7 @@ font: 9pt &quot;HY견고딕&quot;;</string>
      <property name="geometry">
       <rect>
        <x>100</x>
-       <y>300</y>
+       <y>290</y>
        <width>41</width>
        <height>41</height>
       </rect>
@@ -1248,7 +1240,7 @@ font: 9pt &quot;HY견고딕&quot;;</string>
      <property name="geometry">
       <rect>
        <x>98</x>
-       <y>360</y>
+       <y>350</y>
        <width>81</width>
        <height>31</height>
       </rect>
@@ -1290,12 +1282,6 @@ font: 9pt &quot;HY견고딕&quot;;</string>
        </disabled>
       </palette>
      </property>
-     <property name="font">
-      <font>
-       <family>HY헤드라인M</family>
-       <pointsize>10</pointsize>
-      </font>
-     </property>
      <property name="text">
       <string>70mmHg</string>
      </property>
@@ -1303,7 +1289,7 @@ font: 9pt &quot;HY견고딕&quot;;</string>
     <widget class="QLabel" name="label_hello">
      <property name="geometry">
       <rect>
-       <x>430</x>
+       <x>350</x>
        <y>160</y>
        <width>400</width>
        <height>200</height>
@@ -1349,19 +1335,19 @@ font: 9pt &quot;HY견고딕&quot;;</string>
      <property name="font">
       <font>
        <family>Nirmala UI</family>
-       <pointsize>100</pointsize>
+       <pointsize>90</pointsize>
        <italic>false</italic>
       </font>
      </property>
      <property name="text">
-      <string>Hola,</string>
+      <string>HOLA</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_black">
      <property name="geometry">
       <rect>
-       <x>280</x>
-       <y>430</y>
+       <x>260</x>
+       <y>440</y>
        <width>81</width>
        <height>41</height>
       </rect>
@@ -1382,7 +1368,7 @@ font: 9pt &quot;HY견고딕&quot;;</string>
     <widget class="QLabel" name="label_s">
      <property name="geometry">
       <rect>
-       <x>141</x>
+       <x>110</x>
        <y>460</y>
        <width>16</width>
        <height>16</height>
@@ -1395,6 +1381,7 @@ font: 9pt &quot;HY견고딕&quot;;</string>
     <widget class="QLabel" name="label_black3">
      <property name="geometry">
       <rect>
+<<<<<<< HEAD
        <x>-30</x>
 <<<<<<< HEAD
        <y>440</y>
@@ -1530,145 +1517,22 @@ font: 9pt &quot;HY견고딕&quot;;</string>
        <y>850</y>
        <width>141</width>
        <height>41</height>
+=======
+       <x>430</x>
+       <y>390</y>
+       <width>71</width>
+       <height>261</height>
+>>>>>>> parent of 85daf3f (Add files via upload)
       </rect>
-     </property>
-     <property name="palette">
-      <palette>
-       <active>
-        <colorrole role="WindowText">
-         <brush brushstyle="SolidPattern">
-          <color alpha="255">
-           <red>255</red>
-           <green>255</green>
-           <blue>255</blue>
-          </color>
-         </brush>
-        </colorrole>
-       </active>
-       <inactive>
-        <colorrole role="WindowText">
-         <brush brushstyle="SolidPattern">
-          <color alpha="255">
-           <red>255</red>
-           <green>255</green>
-           <blue>255</blue>
-          </color>
-         </brush>
-        </colorrole>
-       </inactive>
-       <disabled>
-        <colorrole role="WindowText">
-         <brush brushstyle="SolidPattern">
-          <color alpha="255">
-           <red>120</red>
-           <green>120</green>
-           <blue>120</blue>
-          </color>
-         </brush>
-        </colorrole>
-       </disabled>
-      </palette>
      </property>
      <property name="font">
       <font>
        <family>HY헤드라인M</family>
-       <pointsize>10</pointsize>
+       <pointsize>11</pointsize>
       </font>
      </property>
-     <property name="text">
-      <string>간지나게 자기</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_9">
-     <property name="geometry">
-      <rect>
-       <x>90</x>
-       <y>910</y>
-       <width>141</width>
-       <height>41</height>
-      </rect>
-     </property>
-     <property name="palette">
-      <palette>
-       <active>
-        <colorrole role="WindowText">
-         <brush brushstyle="SolidPattern">
-          <color alpha="255">
-           <red>255</red>
-           <green>255</green>
-           <blue>255</blue>
-          </color>
-         </brush>
-        </colorrole>
-       </active>
-       <inactive>
-        <colorrole role="WindowText">
-         <brush brushstyle="SolidPattern">
-          <color alpha="255">
-           <red>255</red>
-           <green>255</green>
-           <blue>255</blue>
-          </color>
-         </brush>
-        </colorrole>
-       </inactive>
-       <disabled>
-        <colorrole role="WindowText">
-         <brush brushstyle="SolidPattern">
-          <color alpha="255">
-           <red>120</red>
-           <green>120</green>
-           <blue>120</blue>
-          </color>
-         </brush>
-        </colorrole>
-       </disabled>
-      </palette>
-     </property>
-     <property name="font">
-      <font>
-       <family>HY헤드라인M</family>
-       <pointsize>10</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>작살나게 밥 먹기</string>
-     </property>
-    </widget>
-    <widget class="QCheckBox" name="checkBox">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>800</y>
-       <width>96</width>
-       <height>19</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-    <widget class="QCheckBox" name="checkBox_2">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>860</y>
-       <width>96</width>
-       <height>19</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-    <widget class="QCheckBox" name="checkBox_3">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>920</y>
-       <width>96</width>
-       <height>19</height>
-      </rect>
+     <property name="styleSheet">
+      <string notr="true"/>
      </property>
      <property name="text">
       <string/>

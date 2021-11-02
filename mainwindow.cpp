@@ -46,7 +46,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->label_hello->setGraphicsEffect(efff);
     QPropertyAnimation *aa = new QPropertyAnimation(efff,"opacity");
     //ui->label_hello->setGraphicsEffect(efff);
-    aa->setDuration(10000);
+    aa->setDuration(7777);
     aa->setStartValue(1);
     aa->setEndValue(0);
     aa->setEasingCurve(QEasingCurve::OutBack);
