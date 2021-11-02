@@ -1,11 +1,7 @@
 #include "initscreen.h"
 #include "mainwindow.h"
-
 #include "ui_initscreen.h"
-#include<QPixmap>
-#include<QDebug>
-#include<QDateTime>
-#include <iomanip>
+#include "ui_mainwindow.h"
 
 initscreen::initscreen(QWidget *parent) :
     QDialog(parent),

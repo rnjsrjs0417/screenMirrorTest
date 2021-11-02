@@ -1,10 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QWindow>
-#include <QGraphicsOpacityEffect>
-#include <QPropertyAnimation>
-
-#define X_DELTA_CRIT 300
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -57,6 +52,8 @@ MainWindow::MainWindow(QWidget *parent)
     aa->setEasingCurve(QEasingCurve::OutBack);
     aa->start(QPropertyAnimation::DeleteWhenStopped);
     connect(aa,SIGNAL(finished()),this,SLOT(hideThisWidget()));
+    if(SIGNAL(finished()))
+        qDebug() << "hola has gone";
 
     //date exp
     //localTime = QDateTime::currentDateTime().toString(Qt::TextDate);
@@ -153,13 +150,13 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event)
         {
             //ui->widgets1->move(cursor().pos().x()-mouseClickPoint,0);
             ui->page1->move(cursor().pos().x()-mouseClickPoint,0);
-            ui->page2->move(1080+cursor().pos().x()-mouseClickPoint,0);
+            ui->page2->move(PAGE_WIDTH+cursor().pos().x()-mouseClickPoint,0);
         }
 
         else if(page1_flag == false)
         {
             //ui->widgets1->move(cursor().pos().x()-mouseClickPoint-1080,0);
-            ui->page1->move(cursor().pos().x()-mouseClickPoint-1080,0);
+            ui->page1->move(cursor().pos().x()-mouseClickPoint-PAGE_WIDTH,0);
             ui->page2->move(cursor().pos().x()-mouseClickPoint,0);
         }
 
@@ -198,9 +195,9 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *event)
 
    if(page1_flag == true)
    {
-       if(deltaX < -500)
+       if(deltaX < -DELTA_X_CRIT)
        {
-            ui->page1->move(-1080,0);
+            ui->page1->move(-PAGE_WIDTH,0);
             ui->page2->move(0,0);
 
             //ui->widgets1->move(-1080,0);
@@ -211,7 +208,7 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *event)
        else
        {
            ui->page1->move(0,0);
-           ui->page2->move(1080,0);
+           ui->page2->move(PAGE_WIDTH,0);
 
            qDebug()<< "page1 -> page2 Deniied ! ";
            qDebug()<< " status :  " << page1_flag;
@@ -220,10 +217,10 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *event)
     }
    else
    {
-       if(deltaX > 500)
+       if(deltaX > DELTA_X_CRIT)
        {
             ui->page1->move(0,0);
-            ui->page2->move(1080,0);
+            ui->page2->move(PAGE_WIDTH,0);
             // ui->widgets1->move(0,0);
             page1_flag = true;
             qDebug()<< "page2 -> page1 Accept";
@@ -231,7 +228,7 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *event)
        }
        else
        {
-           ui->page1->move(-1080,0);
+           ui->page1->move(-PAGE_WIDTH,0);
            ui->page2->move(0,0);
            qDebug()<< "page2 -> page1 Deniied ! ";
            qDebug()<< " status :  " << page1_flag;

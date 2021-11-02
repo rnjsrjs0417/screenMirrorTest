@@ -8,6 +8,15 @@
 #include <QDateTime>
 #include <QMouseEvent>
 #include <windows.h>
+#include <QWindow>
+#include <QGraphicsOpacityEffect>
+#include <QPropertyAnimation>
+#include<QPixmap>
+#include <iomanip>
+
+#define DELTA_X_CRIT 500
+#define PAGE_WIDTH 1080
+#define PAGE_HEIGHT 1920
 
 QT_BEGIN_NAMESPACE
 namespace Ui {

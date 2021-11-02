@@ -1281,10 +1281,10 @@ font: 9pt &quot;HY견고딕&quot;;</string>
     <widget class="QLabel" name="label_hello">
      <property name="geometry">
       <rect>
-       <x>430</x>
+       <x>350</x>
        <y>160</y>
-       <width>331</width>
-       <height>191</height>
+       <width>400</width>
+       <height>200</height>
       </rect>
      </property>
      <property name="palette">
@@ -1326,8 +1326,8 @@ font: 9pt &quot;HY견고딕&quot;;</string>
      </property>
      <property name="font">
       <font>
-       <family>Segoe Script</family>
-       <pointsize>77</pointsize>
+       <family>Nirmala UI</family>
+       <pointsize>90</pointsize>
        <italic>false</italic>
       </font>
      </property>

@@ -7,10 +7,12 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     a.setStyle("fusion");
-    //MainWindow w;
-    initscreen w;
-    //w.resize(1080,1920);
-    w.show();
+    //initscreen w;
+    //w.show();
+
+    MainWindow screen;
+    screen.resize(PAGE_WIDTH,PAGE_HEIGHT);
+    screen.show();
 
 
     return a.exec();
