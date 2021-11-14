@@ -2,6 +2,10 @@
 #include "mainwindow.h"
 #include "ui_initscreen.h"
 #include "ui_mainwindow.h"
+#include "GBHealth.hpp"
+#include "gb_thread.hpp"
+#include "lib_header.hpp"
+#include "UltraFace.hpp"
 
 initscreen::initscreen(QWidget *parent) :
     QDialog(parent),

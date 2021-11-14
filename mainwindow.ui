@@ -278,6 +278,9 @@
        <bold>false</bold>
       </font>
      </property>
+     <property name="styleSheet">
+      <string notr="true">font: &quot;C:/Users/kwang/Desktop/font.ttf&quot;;</string>
+     </property>
      <property name="text">
       <string>asdf</string>
      </property>
@@ -390,6 +393,9 @@
        <italic>false</italic>
        <bold>false</bold>
       </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: &quot;C:/Users/kwang/Desktop/font.ttf&quot;;</string>
      </property>
      <property name="text">
       <string>asdfasdf</string>
@@ -770,7 +776,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Tahoma</family>
+       <family>HY헤드라인M</family>
        <pointsize>11</pointsize>
        <weight>50</weight>
        <bold>false</bold>
@@ -947,12 +953,16 @@
      </property>
      <property name="font">
       <font>
-       <family>Impact</family>
+       <family>HY헤드라인M</family>
        <pointsize>20</pointsize>
+       <weight>50</weight>
+       <italic>false</italic>
+       <bold>false</bold>
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">color:white;</string>
+      <string notr="true">color:white;
+font: &quot;C:/Users/kwang/Desktop/font.ttf&quot;;</string>
      </property>
      <property name="text">
       <string>14°</string>
@@ -1021,7 +1031,13 @@
       <font>
        <family>HY헤드라인M</family>
        <pointsize>20</pointsize>
+       <weight>50</weight>
+       <italic>false</italic>
+       <bold>false</bold>
       </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: &quot;C:/Users/kwang/Desktop/font.ttf&quot;;</string>
      </property>
      <property name="text">
       <string>71회</string>
@@ -1077,7 +1093,13 @@
       <font>
        <family>HY헤드라인M</family>
        <pointsize>20</pointsize>
+       <weight>50</weight>
+       <italic>false</italic>
+       <bold>false</bold>
       </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: &quot;C:/Users/kwang/Desktop/font.ttf&quot;;</string>
      </property>
      <property name="text">
       <string>96%</string>
@@ -1146,67 +1168,16 @@
       <font>
        <family>HY헤드라인M</family>
        <pointsize>20</pointsize>
+       <weight>50</weight>
+       <italic>false</italic>
+       <bold>false</bold>
       </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: &quot;C:/Users/kwang/Desktop/font.ttf&quot;;</string>
      </property>
      <property name="text">
       <string>70mmHg</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_hello">
-     <property name="geometry">
-      <rect>
-       <x>430</x>
-       <y>290</y>
-       <width>441</width>
-       <height>200</height>
-      </rect>
-     </property>
-     <property name="palette">
-      <palette>
-       <active>
-        <colorrole role="WindowText">
-         <brush brushstyle="SolidPattern">
-          <color alpha="255">
-           <red>255</red>
-           <green>255</green>
-           <blue>255</blue>
-          </color>
-         </brush>
-        </colorrole>
-       </active>
-       <inactive>
-        <colorrole role="WindowText">
-         <brush brushstyle="SolidPattern">
-          <color alpha="255">
-           <red>255</red>
-           <green>255</green>
-           <blue>255</blue>
-          </color>
-         </brush>
-        </colorrole>
-       </inactive>
-       <disabled>
-        <colorrole role="WindowText">
-         <brush brushstyle="SolidPattern">
-          <color alpha="255">
-           <red>120</red>
-           <green>120</green>
-           <blue>120</blue>
-          </color>
-         </brush>
-        </colorrole>
-       </disabled>
-      </palette>
-     </property>
-     <property name="font">
-      <font>
-       <family>Nirmala UI</family>
-       <pointsize>140</pointsize>
-       <italic>false</italic>
-      </font>
-     </property>
-     <property name="text">
-      <string>Hola,</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_black">
@@ -1307,7 +1278,13 @@
       <font>
        <family>HY헤드라인M</family>
        <pointsize>30</pointsize>
+       <weight>50</weight>
+       <italic>false</italic>
+       <bold>false</bold>
       </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: &quot;C:/Users/kwang/Desktop/font.ttf&quot;;</string>
      </property>
      <property name="text">
       <string>오늘 할 일</string>
@@ -1363,7 +1340,13 @@
       <font>
        <family>HY헤드라인M</family>
        <pointsize>20</pointsize>
+       <weight>50</weight>
+       <italic>false</italic>
+       <bold>false</bold>
       </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: &quot;C:/Users/kwang/Desktop/font.ttf&quot;;</string>
      </property>
      <property name="text">
       <string>끝내주게 숨쉬기</string>
@@ -1419,7 +1402,13 @@
       <font>
        <family>HY헤드라인M</family>
        <pointsize>20</pointsize>
+       <weight>50</weight>
+       <italic>false</italic>
+       <bold>false</bold>
       </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: &quot;C:/Users/kwang/Desktop/font.ttf&quot;;</string>
      </property>
      <property name="text">
       <string>간지나게 자기</string>
@@ -1475,7 +1464,13 @@
       <font>
        <family>HY헤드라인M</family>
        <pointsize>20</pointsize>
+       <weight>50</weight>
+       <italic>false</italic>
+       <bold>false</bold>
       </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: &quot;C:/Users/kwang/Desktop/font.ttf&quot;;</string>
      </property>
      <property name="text">
       <string>작살나게 밥 먹기</string>
@@ -1576,10 +1571,79 @@
       <font>
        <family>HY헤드라인M</family>
        <pointsize>18</pointsize>
+       <weight>50</weight>
+       <italic>false</italic>
+       <bold>false</bold>
       </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font:  &quot;C:/Users/kwang/Desktop/font.ttf&quot;;</string>
      </property>
      <property name="text">
       <string>강수확률 30% 습도 55% 서풍 0m/s</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_hello">
+     <property name="geometry">
+      <rect>
+       <x>430</x>
+       <y>290</y>
+       <width>441</width>
+       <height>200</height>
+      </rect>
+     </property>
+     <property name="palette">
+      <palette>
+       <active>
+        <colorrole role="WindowText">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>255</red>
+           <green>255</green>
+           <blue>255</blue>
+          </color>
+         </brush>
+        </colorrole>
+       </active>
+       <inactive>
+        <colorrole role="WindowText">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>255</red>
+           <green>255</green>
+           <blue>255</blue>
+          </color>
+         </brush>
+        </colorrole>
+       </inactive>
+       <disabled>
+        <colorrole role="WindowText">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>120</red>
+           <green>120</green>
+           <blue>120</blue>
+          </color>
+         </brush>
+        </colorrole>
+       </disabled>
+      </palette>
+     </property>
+     <property name="font">
+      <font>
+       <family>HY헤드라인M</family>
+       <pointsize>140</pointsize>
+       <weight>50</weight>
+       <italic>false</italic>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: &quot;C:/Users/kwang/Desktop/font.ttf&quot;;
+font: 140pt;</string>
+     </property>
+     <property name="text">
+      <string>Hola,</string>
      </property>
     </widget>
    </widget>

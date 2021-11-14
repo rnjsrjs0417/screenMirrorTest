@@ -14,6 +14,7 @@
 #include<QPixmap>
 #include <iomanip>
 
+
 #define DELTA_X_CRIT 500
 #define PAGE_WIDTH 1080
 #define PAGE_HEIGHT 1920
