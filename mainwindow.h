@@ -64,6 +64,11 @@ public slots:
     void myfunction();
 
 
+private slots:
+    void on_pushButton_clicked();
+
+    void on_button_1_clicked();
+
 private:
     //void configureSpinBox(QSpinBox *spinBox,int min,int max) const;
     void onMouseEvent(const QPoint &pos);

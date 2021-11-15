@@ -13,10 +13,6 @@ MainWindow::MainWindow(QWidget *parent)
     setWindowState(Qt::WindowFullScreen);
 
 
-
-
-
-
     // SAVE init postions of widgets
 //    cal_xPos = ui->widget_calendar->pos().x();
 //    cal_yPos = ui->widget_calendar->pos().y();
@@ -108,148 +104,149 @@ MainWindow::MainWindow(QWidget *parent)
     ui->label_black3->setPixmap(pix6.scaled(w,h,Qt::KeepAspectRatio));
     ui->label_black3->setScaledContents(true);
 
+    // sample code for mainwindow
 
-    int vcNum = 0;
-       const int CAM_WIDTH = 640;
-       const int CAM_HEIGHT = 480;
-       const int WAIT = 1;
-
-
-       // GB code. You should have these.
-       GBHealth gb;
+//    int vcNum = 0;
+//       const int CAM_WIDTH = 640;
+//       const int CAM_HEIGHT = 480;
+//       const int WAIT = 1;
 
 
-       std::string face_detect_path = "model/face_detection.onnx";
-       std::string landmark_path = "model/landmark_detection.onnx";
+//       // GB code. You should have these.
+//       GBHealth gb;
 
 
-       int detect_interval = 8;            //얼굴인식 1초동안 실행 횟수
-       float detect_threshold = 0.5;
-       int detect_image_size = 200;
+//       std::string face_detect_path = "model/face_detection.onnx";
+//       std::string landmark_path = "model/landmark_detection.onnx";
 
 
-       UltraFace *ultra_face = new UltraFace(face_detect_path, detect_interval, detect_threshold, detect_image_size);
-       #ifdef IS_LANDMARK
-       ultra_face->LoadLandMark(landmark_path);
-       #endif
-       ultra_face->StartInterval();
+//       int detect_interval = 8;            //얼굴인식 1초동안 실행 횟수
+//       float detect_threshold = 0.5;
+//       int detect_image_size = 200;
 
 
-       cv::VideoCapture cap_bgr, cap_ir;
+//       UltraFace *ultra_face = new UltraFace(face_detect_path, detect_interval, detect_threshold, detect_image_size);
+//       #ifdef IS_LANDMARK
+//       ultra_face->LoadLandMark(landmark_path);
+//       #endif
+//       ultra_face->StartInterval();
 
 
-       while(!cap_bgr.isOpened()){
-           #ifdef _WIN32
-           cap_bgr.open(vcNum++);
-           #else
-           cap_bgr.open(vcNum++, cv::CAP_V4L2);
-           #endif
-       }
-       std::cout<< "Camera_" << vcNum-1 <<" Open"<<std::endl;
+//       cv::VideoCapture cap_bgr, cap_ir;
 
 
-
-       std::cout << "Start grabbing" << std::endl;
-       cap_bgr.set(cv::CAP_PROP_FOURCC, cv::VideoWriter::fourcc('M','J','P','G'));
-       cap_bgr.set(cv::CAP_PROP_FRAME_WIDTH, CAM_WIDTH);
-       cap_bgr.set(cv::CAP_PROP_FRAME_HEIGHT, CAM_HEIGHT);
-       cap_bgr.set(cv::CAP_PROP_FPS, 30.0);
+//       while(!cap_bgr.isOpened()){
+//           #ifdef _WIN32
+//           cap_bgr.open(vcNum++);
+//           #else
+//           cap_bgr.open(vcNum++, cv::CAP_V4L2);
+//           #endif
+//       }
+//       std::cout<< "Camera_" << vcNum-1 <<" Open"<<std::endl;
 
 
 
-       // We generate separate thread timers to output Pulse and Blood Pressure Systolic values.
-       // Because I just want to get values regularly.
-       // You may get the value directly within the "while" below.
-
-       int startTime = (cv::getTickCount()) / cv::getTickFrequency();
-
-
-       GBThread *printBIO = new GBThread();
-
-       printBIO->SetInterval([&]() {
-           int nowTime = (cv::getTickCount()) / cv::getTickFrequency();
-           std::cout<<cv::format("TIME: %.0fs", (double)(nowTime-startTime));
-           if (gb.bpm_ > 0)
-           {
-               std::cout <<cv::format(", fps: %2.1f / BPM: %3d bpm", gb.fps_, gb.bpm_);
-
-
-               if(gb.spo2_ > 0)
-                   std::cout<<", Spo2: "<<gb.spo2_;
-
-
-               if(gb.temperature_ > 0)
-                   std::cout<<", Temperature: "<<gb.temperature_;
-
-
-               if (gb.blood_pressure_systolic_ > 0){
-                   std::cout << ", blood pressure: " << gb.blood_pressure_diastolic_ <<" ~ "<< gb.blood_pressure_systolic_ << " mmHg";
-                   switch (gb.condition_) {
-                       case gb.CONDITION_WORST: std::cout << ", condition: worst"; break;
-                       case gb.CONDITION_BAD: std::cout << ", condition: bad"; break;
-                       case gb.CONDITION_LITTLE_BAD: std::cout << ", condition: little_bad"; break;
-                       case gb.CONDITION_GOOD: std::cout << ", condition: good"; break;
-                       default: break;
-                   }
-               }
-           }
-           std::cout << std::endl;
-       }, 1000);
+//       std::cout << "Start grabbing" << std::endl;
+//       cap_bgr.set(cv::CAP_PROP_FOURCC, cv::VideoWriter::fourcc('M','J','P','G'));
+//       cap_bgr.set(cv::CAP_PROP_FRAME_WIDTH, CAM_WIDTH);
+//       cap_bgr.set(cv::CAP_PROP_FRAME_HEIGHT, CAM_HEIGHT);
+//       cap_bgr.set(cv::CAP_PROP_FPS, 30.0);
 
 
 
-       // Your code. Replace face and landmark find
-       while (true)
-       {
-           cv::Mat mat_ir, mat_bgr;
-           cap_bgr.read(mat_bgr);
+//       // We generate separate thread timers to output Pulse and Blood Pressure Systolic values.
+//       // Because I just want to get values regularly.
+//       // You may get the value directly within the "while" below.
+
+//       int startTime = (cv::getTickCount()) / cv::getTickFrequency();
+
+
+//       GBThread *printBIO = new GBThread();
+
+//       printBIO->SetInterval([&]() {
+//           int nowTime = (cv::getTickCount()) / cv::getTickFrequency();
+//           std::cout<<cv::format("TIME: %.0fs", (double)(nowTime-startTime));
+//           if (gb.bpm_ > 0)
+//           {
+//               std::cout <<cv::format(", fps: %2.1f / BPM: %3d bpm", gb.fps_, gb.bpm_);
+
+
+//               if(gb.spo2_ > 0)
+//                   std::cout<<", Spo2: "<<gb.spo2_;
+
+
+//               if(gb.temperature_ > 0)
+//                   std::cout<<", Temperature: "<<gb.temperature_;
+
+
+//               if (gb.blood_pressure_systolic_ > 0){
+//                   std::cout << ", blood pressure: " << gb.blood_pressure_diastolic_ <<" ~ "<< gb.blood_pressure_systolic_ << " mmHg";
+//                   switch (gb.condition_) {
+//                       case gb.CONDITION_WORST: std::cout << ", condition: worst"; break;
+//                       case gb.CONDITION_BAD: std::cout << ", condition: bad"; break;
+//                       case gb.CONDITION_LITTLE_BAD: std::cout << ", condition: little_bad"; break;
+//                       case gb.CONDITION_GOOD: std::cout << ", condition: good"; break;
+//                       default: break;
+//                   }
+//               }
+//           }
+//           std::cout << std::endl;
+//       }, 1000);
 
 
 
-           cv::flip(mat_bgr, mat_bgr, 1);
+//       // Your code. Replace face and landmark find
+//       while (true)
+//       {
+//           cv::Mat mat_ir, mat_bgr;
+//           cap_bgr.read(mat_bgr);
 
 
 
-           if(ultra_face->IsInterval()){
-               #ifdef IS_LANDMARK
-               ultra_face->SetShareData(mat_bgr, ultra_face->DetectType::Landmark);
-               #else
-               ultra_face->SetShareData(mat_bgr, ultra_face->DetectType::Face);
-               #endif
-           }
+//           cv::flip(mat_bgr, mat_bgr, 1);
 
 
-           #ifdef IS_LANDMARK
-               cv::Rect face;
-               std::vector<cv::Point2f> params = ultra_face->Get_share_landmark_();
-           #else
-            cv::Rect2f face = ultra_face->Get_share_face_();
-           #endif
+
+//           if(ultra_face->IsInterval()){
+//               #ifdef IS_LANDMARK
+//               ultra_face->SetShareData(mat_bgr, ultra_face->DetectType::Landmark);
+//               #else
+//               ultra_face->SetShareData(mat_bgr, ultra_face->DetectType::Face);
+//               #endif
+//           }
 
 
-           #ifdef IS_LANDMARK
-               gb.CallErr(gb.Get(mat_bgr, params, face));
-           #else
-               gb.CallErr(gb.Get(mat_bgr, face));
-           #endif
+//           #ifdef IS_LANDMARK
+//               cv::Rect face;
+//               std::vector<cv::Point2f> params = ultra_face->Get_share_landmark_();
+//           #else
+//            cv::Rect2f face = ultra_face->Get_share_face_();
+//           #endif
 
 
-           cv::rectangle(mat_bgr, face, cv::Scalar(0, 255, 0), 1);
-           cv::imshow("mat_bgr", mat_bgr);
-           if (cv::waitKey(WAIT) > -1)
-           {
-               cv::destroyAllWindows();
-               break;
-           }
-       }
+//           #ifdef IS_LANDMARK
+//               gb.CallErr(gb.Get(mat_bgr, params, face));
+//           #else
+//               gb.CallErr(gb.Get(mat_bgr, face));
+//           #endif
 
 
-       gb.StopInterval();
+//           cv::rectangle(mat_bgr, face, cv::Scalar(0, 255, 0), 1);
+//           cv::imshow("mat_bgr", mat_bgr);
+//           if (cv::waitKey(WAIT) > -1)
+//           {
+//               cv::destroyAllWindows();
+//               break;
+//           }
+//       }
 
 
-       ultra_face->Init();
-       ultra_face->StopInterval();
-       printBIO->StopInterval();
+//       gb.StopInterval();
+
+
+//       ultra_face->Init();
+//       ultra_face->StopInterval();
+//       printBIO->StopInterval();
 
 
 }
@@ -415,4 +412,20 @@ void MainWindow::onMouseEvent( const QPoint &pos)
 
 //configureSpinBox(ui->xSpinBox, -INT_MAX, +INT_MAX);
 //configureSpinBox(ui->ySpinBox, -INT_MAX, +INT_MAX); // spin box setting
+
+
+
+void MainWindow::on_button_1_clicked()
+{
+    ui->logo_1->setVisible(false);
+    ui->button_1->setVisible(false);
+
+    int i=0;
+    while(i<800000)
+    {
+        i++;
+    }
+
+    ui->button_1->setVisible(true);
+}
 
