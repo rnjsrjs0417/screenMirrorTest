@@ -10,6 +10,7 @@ CONFIG += c++11
 
 SOURCES += \
     initscreen.cpp \
+    liardetector.cpp \
     main.cpp \
     mainwindow.cpp
 
@@ -18,11 +19,13 @@ HEADERS += \
     UltraFace.hpp \
     gb_thread.hpp \
     initscreen.h \
+    liardetector.h \
     lib_header.hpp \
     mainwindow.h
 
 FORMS += \
     initscreen.ui \
+    liardetector.ui \
     mainwindow.ui
 
 

@@ -14,6 +14,7 @@
 #include<QPixmap>
 #include <iomanip>
 
+#include "liardetector.h"
 
 #define DELTA_X_CRIT 500
 #define PAGE_WIDTH 1080
@@ -65,9 +66,7 @@ public slots:
 
 
 private slots:
-    void on_pushButton_clicked();
-
-    void on_button_1_clicked();
+    void on_button1_clicked();
 
 private:
     //void configureSpinBox(QSpinBox *spinBox,int min,int max) const;
@@ -75,6 +74,7 @@ private:
     void init_hiding();
     void page1_call();
     void page2_call();
+    void liardetect();
 
     Ui::MainWindow *ui;
     QTimer *timer;

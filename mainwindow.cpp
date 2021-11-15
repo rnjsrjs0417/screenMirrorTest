@@ -272,6 +272,12 @@ void MainWindow::page2_call()
 
 }
 
+void MainWindow::liardetect()
+{
+    liarDetector p;
+    p.show();
+}
+
 void MainWindow::myfunction() // Operates in every 1 sec
 {
     time = QTime::currentTime();
@@ -415,17 +421,9 @@ void MainWindow::onMouseEvent( const QPoint &pos)
 
 
 
-void MainWindow::on_button_1_clicked()
+
+void MainWindow::on_button1_clicked()
 {
-    ui->logo_1->setVisible(false);
-    ui->button_1->setVisible(false);
-
-    int i=0;
-    while(i<800000)
-    {
-        i++;
-    }
-
-    ui->button_1->setVisible(true);
+   liardetect();
 }
 

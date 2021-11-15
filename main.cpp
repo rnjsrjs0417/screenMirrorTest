@@ -11,14 +11,14 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     a.setStyle("fusion");
-    //initscreen w;
-    //w.show();
+    initscreen w;
+    w.show();
     QApplication application(argc, argv);
 
 
-    MainWindow screen;
-    screen.resize(PAGE_WIDTH,PAGE_HEIGHT);
-    screen.show();
+//    MainWindow screen;
+//    screen.resize(PAGE_WIDTH,PAGE_HEIGHT);
+//    screen.show();
 
 
 
