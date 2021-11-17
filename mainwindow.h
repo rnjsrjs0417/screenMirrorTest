@@ -13,24 +13,27 @@
 #include <QPropertyAnimation>
 #include<QPixmap>
 #include <iomanip>
+#include <iostream>
 
-#include "liardetector.h"
+#include "UltraFace.hpp"
+#include "GBHealth.hpp"
+#include <opencv2/opencv.hpp>
+
+#include "ui_mainwindow.h"
+
+
 
 #define DELTA_X_CRIT 500
 #define PAGE_WIDTH 1080
 #define PAGE_HEIGHT 1920
 
 QT_BEGIN_NAMESPACE
-namespace Ui {
-class MainWindow;
-}
+namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
-
-class QSpinBox;
 
 class MainWindow : public QMainWindow
 {
-    //mouse event values
+
     bool mouseStat, page1_flag;
     int mouseClickPoint; // remeber only x point
 
@@ -47,38 +50,43 @@ class MainWindow : public QMainWindow
     QString time_text;
     QTime time;
 
-
     Q_OBJECT
-
-public:
-    MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
-
-protected:
-    void mouseDoubleClickEvent(QMouseEvent *event) override;
-    void mouseMoveEvent(QMouseEvent *event) override;
-    void mousePressEvent(QMouseEvent *event) override;
-    void mouseReleaseEvent(QMouseEvent *event) override;
-
 
 public slots:
     void myfunction();
 
 
+public:
+    MainWindow(QWidget *parent = nullptr);
+    ~MainWindow();
+    void mouseDoubleClickEvent(QMouseEvent *event) override;
+    void mouseMoveEvent(QMouseEvent *event) override;
+    void mousePressEvent(QMouseEvent *event) override;
+    void mouseReleaseEvent(QMouseEvent *event) override;
+    void sampling();
+    void pixmapSet(Ui::MainWindow *ui);
+    void dateSet(Ui::MainWindow *ui);
+
+
+
 private slots:
-    void on_button1_clicked();
+    void on_widget_calendar_clicked(const QDate &date);
 
 private:
-    //void configureSpinBox(QSpinBox *spinBox,int min,int max) const;
-    void onMouseEvent(const QPoint &pos);
-    void init_hiding();
-    void page1_call();
-    void page2_call();
-    void liardetect();
-
     Ui::MainWindow *ui;
+    void onMouseEvent(const QPoint &pos);
     QTimer *timer;
-
-
 };
 #endif // MAINWINDOW_H
+
+
+
+
+
+
+
+
+
+
+
+
