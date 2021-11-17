@@ -72,6 +72,8 @@ public:
 private slots:
     void on_widget_calendar_clicked(const QDate &date);
 
+    void on_cal_button_clicked();
+
 private:
     Ui::MainWindow *ui;
     void onMouseEvent(const QPoint &pos);

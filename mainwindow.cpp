@@ -30,11 +30,9 @@ MainWindow::MainWindow(QWidget *parent)
 //    if(SIGNAL(finished()))
 //        qDebug() << "hola has gone";
 
+
     dateSet(ui);
     pixmapSet(ui);
-
-
-
 }
 
 MainWindow::~MainWindow()
@@ -289,8 +287,8 @@ void MainWindow::sampling()
                gb.CallErr(gb.Get(mat_bgr, face));
            #endif
 
-           cv::rectangle(mat_bgr, face, cv::Scalar(0, 255, 0), 1);
-           cv::imshow("mat_bgr", mat_bgr);
+       //    cv::rectangle(mat_bgr, face, cv::Scalar(0, 255, 0), 1);
+       //   cv::imshow("mat_bgr", mat_bgr);
            if (cv::waitKey(WAIT) > -1)
            {
                cv::destroyAllWindows();
@@ -357,10 +355,16 @@ void MainWindow::dateSet(Ui::MainWindow *ui)
     ui->label_date_time->setFont(font2);
 }
 
-
-
 void MainWindow::on_widget_calendar_clicked(const QDate &date)
 {
     qDebug() << "DONT TOUCH ME FUCKin FREEK";
+    ui->widget_calendar->move(-400,590);
+}
+
+
+void MainWindow::on_cal_button_clicked()
+{
+    qDebug() << "hello ~ ";
+    ui->widget_calendar->move(-20,590);
 }
 
