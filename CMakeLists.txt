@@ -30,6 +30,10 @@ set(PROJECT_SOURCES
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
+        netconnection.cpp
+        netconnection.h
+        recvthread.cpp
+        recvthread.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -88,6 +92,9 @@ TARGET_LINK_LIBRARIES( ${ProjectId}
     PRIVATE ${gbFace}
     PRIVATE ${OpenCV_LIBS}
 )
+
+target_link_libraries(${ProjectId} PUBLIC pthread)
+target_link_libraries(${ProjectId} PUBLIC ws2_32)
 
 IF(WIN32)
 TARGET_LINK_LIBRARIES(${ProjectId}
