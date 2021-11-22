@@ -66,13 +66,21 @@ public:
     void sampling();
     void pixmapSet(Ui::MainWindow *ui);
     void dateSet(Ui::MainWindow *ui);
-
+    void page2_button1();
 
 
 private slots:
     void on_widget_calendar_clicked(const QDate &date);
 
     void on_cal_button_clicked();
+
+    void on_pushButton_clicked();
+
+    void on_page2_2button_clicked();
+
+    void on_page2_3button_clicked();
+
+
 
 private:
     Ui::MainWindow *ui;
