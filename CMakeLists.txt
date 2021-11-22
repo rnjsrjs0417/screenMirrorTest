@@ -32,7 +32,10 @@ set(PROJECT_SOURCES
         secdialog.cpp
         secdialog.hpp
         secdialog.ui
-
+        netconnection.cpp
+        netconnection.h
+        recvthread.cpp
+        recvthread.h
 )
 
 FIND_PACKAGE( OpenCV REQUIRED )
@@ -90,8 +93,12 @@ TARGET_LINK_LIBRARIES( ${ProjectId}
     PRIVATE ${OpenCV_LIBS}
 )
 
+target_link_libraries(${ProjectId} PUBLIC pthread)
+target_link_libraries(${ProjectId} PUBLIC ws2_32)
+
 IF(WIN32)
 TARGET_LINK_LIBRARIES(${ProjectId}
     PRIVATE iphlpapi
 )
+
 ENDIF()
