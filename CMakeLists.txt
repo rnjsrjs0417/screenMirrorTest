@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(helpme VERSION 0.1 LANGUAGES CXX)
+project(screenMirrorTest VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
@@ -30,47 +30,56 @@ set(PROJECT_SOURCES
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
+        netconnection.cpp
+        netconnection.h
+        recvthread.cpp
+        recvthread.h
+        secdialog.hpp
+        secdialog.cpp
+        secdialog.ui
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-    qt_add_executable(helpme
+    qt_add_executable(screenMirrorTest
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
     )
 # Define target properties for Android with Qt 6 as:
-#    set_property(TARGET helpme APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
+#    set_property(TARGET screenMirrorTest APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
 #                 ${CMAKE_CURRENT_SOURCE_DIR}/android)
 # For more information, see https://doc.qt.io/qt-6/qt-add-executable.html#target-creation
 else()
     if(ANDROID)
-        add_library(helpme SHARED
+        add_library(screenMirrorTest SHARED
             ${PROJECT_SOURCES}
         )
 # Define properties for Android with Qt 5 after find_package() calls as:
 #    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
     else()
-        add_executable(helpme
+        add_executable(screenMirrorTest
             ${PROJECT_SOURCES}
         )
     endif()
 endif()
 
-target_link_libraries(helpme PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(screenMirrorTest PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 
-set_target_properties(helpme PROPERTIES
+set_target_properties(screenMirrorTest PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
 )
 
 if(QT_VERSION_MAJOR EQUAL 6)
-    qt_finalize_executable(helpme)
+    qt_finalize_executable(screenMirrorTest)
 endif()
 
 
 
 #add
 
+target_link_libraries(${ProjectId} PUBLIC pthread)
+target_link_libraries(${ProjectId} PUBLIC ws2_32)
 
 
 FIND_LIBRARY( gbHealth NAME libgbhealth.a HINTS ${CMAKE_SOURCE_DIR}/libs REQUIRED)

@@ -1,11 +1,16 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "netconnection.h"
 
 
+
+int t=0;
+int r=0;
 int bpm=0, spo2=0;
 int minpress=0, maxpress=0;
 float temper=0;
-
+int bpm2=0,maxpress2=0;
+int bpm3=0,maxpress3=0;
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -14,7 +19,11 @@ MainWindow::MainWindow(QWidget *parent)
     page1_flag = true;
     // init settings etc
 
-
+    ui->page1->move(0,0);
+    ui->page2_1->move(0,0);
+    ui->page2_2->move(0,1920);
+    ui->page2_3->move(0,3940);
+    ui->page2->move(1080,0);
 
     // Graphinc Settings
     QGraphicsOpacityEffect *efff = new QGraphicsOpacityEffect(this);
@@ -27,12 +36,14 @@ MainWindow::MainWindow(QWidget *parent)
     aa->setEasingCurve(QEasingCurve::OutBack);
     aa->start(QPropertyAnimation::DeleteWhenStopped);
     connect(aa,SIGNAL(finished()),this,SLOT(hideThisWidget()));
+
 //    if(SIGNAL(finished()))
 //        qDebug() << "hola has gone";
 
 
     dateSet(ui);
     pixmapSet(ui);
+
 }
 
 MainWindow::~MainWindow()
@@ -46,11 +57,33 @@ void MainWindow::myfunction() // Operates in every 1 sec
     time_text = time.toString("AP hh : mm ");
     ui->label_date_time->setText(time_text);
 
+    if( bpm==0 || minpress == 0 ){
+        ui->label_23->setText("카메라를 봐주세요");
+        ui->pushButton_2->setText("초기 정보 측정중");
+        //qDebug()<<"카메라를 봐주세요";
+        ui->page2_2button->setText("측정중");
+       // qDebug()<<bpm2;
+        //qDebug()<<bpm3;
+        r=0;
+    }
+    else{
+        ui->label_23->setText("거짓말 탐지중...");
+        ui->pushButton_2->setText("시작하기");
+        //qDebug()<<"거짓말 탐지중";
+        ui->page2_2button->setText("결과보기");
+        //qDebug()<<bpm2;
+        //qDebug()<<bpm3;
+        r=1;
+}
+
+
+//        if((bpm3-bpm2)<-2||(bpm3-bpm2)>2)
+//            ui->page2_2button->setText("측정완료");
 
     ui->label_2->setText(QString::number(bpm));
     ui->label_3->setText(QString::number(spo2));
-    ui->label_5->setText(QString::number((minpress+maxpress)/2));
-
+    ui->label_5->setText(QString::number(minpress));
+    ui->label_20->setText(QString::number(maxpress));
 }
 
 void MainWindow::onMouseEvent( const QPoint &pos) //
@@ -101,7 +134,9 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
     this->mouseStat = true;                       // widget,screen slide
 
     onMouseEvent(event->pos());
-    event->accept();}
+    event->accept();
+}
+
 void MainWindow::mouseReleaseEvent(QMouseEvent *event)
 {
 // Move back to init pos  / when mouse released
@@ -114,22 +149,57 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *event)
 
     qDebug()<< deltaX;
 
+    QPropertyAnimation *pa1 = new QPropertyAnimation(ui->page1,"geometry");
+    QPropertyAnimation *pa2 = new QPropertyAnimation(ui->page2,"geometry");
+    //ui->label_hello->setGraphicsEffect(efff);
+
+    pa1->setEasingCurve(QEasingCurve::OutQuint);
+    pa2->setEasingCurve(QEasingCurve::OutQuint);
+    pa1->setDuration(200);
+    pa2->setDuration(200);
+
    if(page1_flag == true)
    {
        if(deltaX < -DELTA_X_CRIT)
        {
-            ui->page1->move(-PAGE_WIDTH,0);
-            ui->page2->move(0,0);
 
-            //ui->widgets1->move(-1080,0);
+           pa1->setStartValue(ui->page1->geometry());
+           pa1->setEndValue(QRect(-PAGE_WIDTH,0,1080,1920));
+
+           pa1->start();
+           qDebug()<<ui->page1->pos().x();
+
+           pa2->setStartValue(ui->page2->geometry());
+           pa2->setEndValue(QRect(0,0,1080,1920));
+
+           pa2->start();
+
+            //ui->page1->move(-PAGE_WIDTH,0);
+            //ui->page2->move(0,0);
+
             page1_flag = false;
             qDebug()<< "page1 -> page2 Accept";
             qDebug()<< " status :  " << page1_flag;
        }
        else
        {
-           ui->page1->move(0,0);
-           ui->page2->move(PAGE_WIDTH,0);
+
+
+           pa1->setStartValue(ui->page1->geometry());
+           pa1->setEndValue(QRect(0,0,1080,1920));
+
+           pa1->start();
+           qDebug()<<ui->page1->pos().x();
+
+
+           pa2->setStartValue(ui->page2->geometry());
+           pa2->setEndValue(QRect(PAGE_WIDTH,0,1080,1920));
+
+           pa2->start();
+
+
+           //ui->page1->move(0,0);
+           //ui->page2->move(PAGE_WIDTH,0);
 
            qDebug()<< "page1 -> page2 Deniied ! ";
            qDebug()<< " status :  " << page1_flag;
@@ -140,8 +210,23 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *event)
    {
        if(deltaX > DELTA_X_CRIT)
        {
-            ui->page1->move(0,0);
-            ui->page2->move(PAGE_WIDTH,0);
+
+
+           pa1->setStartValue(ui->page1->geometry());
+           pa1->setEndValue(QRect(0,0,1080,1920));
+
+           pa1->start();
+           qDebug()<<ui->page1->pos().x();
+
+
+           pa2->setStartValue(ui->page2->geometry());
+           pa2->setEndValue(QRect(PAGE_WIDTH,0,1080,1920));
+
+           pa2->start();
+
+
+            //ui->page1->move(0,0);
+            //ui->page2->move(PAGE_WIDTH,0);
             // ui->widgets1->move(0,0);
             page1_flag = true;
             qDebug()<< "page2 -> page1 Accept";
@@ -149,8 +234,17 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *event)
        }
        else
        {
-           ui->page1->move(-PAGE_WIDTH,0);
-           ui->page2->move(0,0);
+           pa1->setStartValue(ui->page1->geometry());
+           pa1->setEndValue(QRect(-PAGE_WIDTH,0,1080,1920));
+           pa1->start();
+           qDebug()<<ui->page1->pos().x();
+
+           pa2->setStartValue(ui->page2->geometry());
+           pa2->setEndValue(QRect(0,0,1080,1920));
+           pa2->start();
+
+           //ui->page1->move(-PAGE_WIDTH,0);
+           //ui->page2->move(0,0);
            qDebug()<< "page2 -> page1 Deniied ! ";
            qDebug()<< " status :  " << page1_flag;
            //ui->widgets1->move(-1080,0);
@@ -173,8 +267,9 @@ void MainWindow::sampling()
        // GB code. You should have these.
        GBHealth gb;
 
-       std::string face_detect_path = "C:\\Users\\Kwon Geon\\Desktop\\HELPME\\helpme\\model\\face_detection.onnx";
-       std::string landmark_path = "C:\\Users\\Kwon Geon\\Desktop\\HELPME\\helpme\\model\\landmark_detection.onnx";
+       std::string face_detect_path = "C:\\Users\\Kwon Geon\\Documents\\GitHub\\screenMirrorTest\\model\\face_detection.onnx";
+       std::string landmark_path = "C:\\Users\\Kwon Geon\\Documents\\GitHub\\screenMirrorTest\\model\\landmark_detection.onnx";
+
 
        int detect_interval = 8;            //얼굴인식 1초동안 실행 횟수
        float detect_threshold = 0.5;
@@ -216,12 +311,18 @@ void MainWindow::sampling()
            int nowTime = (cv::getTickCount()) / cv::getTickFrequency();
            std::cout<<cv::format("TIME: %.0fs", (double)(nowTime-startTime));
 
+            bpm = 0;
+            temper = 0;
+            minpress=0;
+            maxpress =0;
+
            // SAMPLE data to values
            if (gb.bpm_ > 0)
            {
                std::cout <<cv::format(", fps: %2.1f / BPM: %3d bpm", gb.fps_, gb.bpm_);
                 // beat per minutes
                 bpm = gb.bpm_;
+                //bpm2=gb.bpm_;
                if(gb.spo2_ > 0)
                {
                    std::cout<<", Spo2: "<<gb.spo2_;
@@ -239,6 +340,10 @@ void MainWindow::sampling()
 
                if (gb.blood_pressure_systolic_ > 0){
                    std::cout << ", blood pressure: " << gb.blood_pressure_diastolic_ <<" ~ "<< gb.blood_pressure_systolic_ << " mmHg";
+
+                   minpress = gb.blood_pressure_diastolic_;
+                   maxpress = gb.blood_pressure_systolic_;
+                   //maxpress2=gb.blood_pressure_systolic_;
                    switch (gb.condition_) {
                        case gb.CONDITION_WORST: std::cout << ", condition: worst"; break;
                        case gb.CONDITION_BAD: std::cout << ", condition: bad"; break;
@@ -247,9 +352,8 @@ void MainWindow::sampling()
                        default: break;
 
                        // blood pressure
-                        minpress = gb.blood_pressure_diastolic_;
-                        maxpress = gb.blood_pressure_systolic_;
-                   }
+
+                    }
                }
            }
            std::cout << std::endl;
@@ -357,14 +461,160 @@ void MainWindow::dateSet(Ui::MainWindow *ui)
 
 void MainWindow::on_widget_calendar_clicked(const QDate &date)
 {
-    qDebug() << "DONT TOUCH ME FUCKin FREEK";
-    ui->widget_calendar->move(-400,590);
-}
+    //qDebug() << "DONT TOUCH ME FUCKin FREEK";
 
+    QPropertyAnimation *pa1 = new QPropertyAnimation(ui->widget_calendar,"geometry");
+    pa1->setEasingCurve(QEasingCurve::OutQuint);
+    pa1->setDuration(200);
+
+
+    pa1->setStartValue(ui->widget_calendar->geometry());
+    pa1->setEndValue(QRect(-400,590,380,270));
+    pa1->start();
+
+    //ui->widget_calendar->move(-400,590);
+}
 
 void MainWindow::on_cal_button_clicked()
 {
-    qDebug() << "hello ~ ";
-    ui->widget_calendar->move(-20,590);
+    //qDebug() << "hello ~ ";
+    // ui->widget_calendar->move(-20,590);
+
+    QPropertyAnimation *pa1 = new QPropertyAnimation(ui->widget_calendar,"geometry");
+    pa1->setEasingCurve(QEasingCurve::OutQuint);
+    pa1->setDuration(200);
+
+
+    pa1->setStartValue(ui->widget_calendar->geometry());
+    pa1->setEndValue(QRect(-20,590,380,270));
+    pa1->start();
+
+}
+
+
+void MainWindow::on_page2_2button_clicked() // 결과확인버튼
+{
+    if(r==0) return;
+
+    bpm3=bpm;
+    maxpress3=maxpress;
+
+    // to page3
+    ui->page2_1->move(0,-3840);
+    ui->page2_2->move(0,-1920);
+
+    QPropertyAnimation *ppp = new QPropertyAnimation(ui->page2_3,"geometry");
+    ppp->setEasingCurve(QEasingCurve::OutQuint);
+    ppp->setDuration(200);
+
+
+    ppp->setStartValue(ui->page2_3->geometry());
+    ppp->setEndValue(QRect(0,0,1080,1920));
+    ppp->start();
+
+
+    ui->label_16->setText(QString::number(bpm2));
+    ui->label_17->setText(QString::number(maxpress2));
+    ui->label_18->setText(QString::number(bpm3));
+    ui->label_19->setText(QString::number(maxpress3));
+
+
+    if((bpm3+maxpress3)-(bpm2+maxpress2)<3)
+    {
+       ui->label_22->setText("진실!");
+       ui->because->setText("옳은 말을 했군요 . . . ");
+    }
+    else
+    {
+       ui->label_22->setText("거짓!!!");
+       ui->because->setText("당신은 거짓말을 하고 있습니다...");
+    }
+}
+
+void MainWindow::on_page2_3button_clicked() //
+{
+    // to page1
+    QPropertyAnimation *pppp = new QPropertyAnimation(ui->page2_1,"geometry");
+    pppp->setEasingCurve(QEasingCurve::OutQuint);
+    pppp->setDuration(200);
+
+
+    pppp->setStartValue(ui->page2_1->geometry());
+    pppp->setEndValue(QRect(0,0,1080,1920));
+    pppp->start();
+
+
+    ui->page2_2->move(0,1920);
+    ui->page2_3->move(0,3840);
+
+
+}
+
+void MainWindow::page2_button1()
+{
+    if(r==0) return;
+
+    bpm2=bpm;
+    maxpress2=maxpress;
+
+    int n=0;
+    qDebug()<< "startbutton clicked ";
+    ui->page2_1->move(0,-1920);
+
+    // ui->page2_2->move(0,0);
+
+    QPropertyAnimation *pp = new QPropertyAnimation(ui->page2_2,"geometry");
+    pp->setEasingCurve(QEasingCurve::OutQuint);
+    pp->setDuration(200);
+
+    pp->setStartValue(ui->page2_2->geometry());
+    pp->setEndValue(QRect(0,0,1080,1920));
+    pp->start();
+
+    ui->page2_3->move(0,1920);
+
+    QGraphicsOpacityEffect *efff = new QGraphicsOpacityEffect(this);
+    ui->page2_2button->setGraphicsEffect(efff);
+    QPropertyAnimation *aa = new QPropertyAnimation(efff,"opacity");
+
+//    QGraphicsOpacityEffect *dfff = new QGraphicsOpacityEffect(this);
+//    ui->page2_2button->setGraphicsEffect(dfff);
+//    QPropertyAnimation *bb = new QPropertyAnimation(dfff,"opacity");
+
+    qDebug()<< "count start ";
+    aa->setDuration(8000);
+    aa->setStartValue(0);
+    aa->setEndValue(1);
+
+//    bb->setDuration(100);
+//    bb->setStartValue(0);
+//    bb->setEndValue(1);
+
+    aa->setEasingCurve(QEasingCurve::InExpo);
+    aa->start();
+    connect(aa,SIGNAL(finished()),this,SLOT(hideThisWidget));
+
+//    if(SIGNAL(finished()))
+//    {
+//        qDebug()<< "signal called  ";
+//        bb->setDuration(100);
+//        bb->setStartValue(0);
+//        bb->setEndValue(1);
+//        bb->start();
+//         qDebug()<< "bb start ";
+//    }
+
+    r=0;
+
+}
+
+void MainWindow::test(int res)
+{
+    ui->label_date->setText(" LOGIN COMPLETE ");
+}
+
+void MainWindow::on_pushButton_2_clicked()
+{
+     page2_button1();
 }
 
