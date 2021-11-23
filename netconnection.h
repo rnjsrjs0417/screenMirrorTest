@@ -7,12 +7,12 @@
 #include <winsock2.h>
 #include <windows.h>
 
-class MainWindow;
+class SecDialog;
 
 class NetConnection
 {
 public:
-    NetConnection(MainWindow* w, std::string server, void (MainWindow::*_callback)(int));
+    NetConnection(SecDialog* w, std::string server, void (SecDialog::*_callback)(int));
     ~NetConnection();
 
     bool init_network(std::string server);
@@ -32,8 +32,8 @@ private:
 private:
     SOCKET TCP_Socket;
     std::string server_url;
-    MainWindow* window;
-    void (MainWindow::*callback)(int);
+    SecDialog* window;
+    void (SecDialog::*callback)(int);
 };
 
 

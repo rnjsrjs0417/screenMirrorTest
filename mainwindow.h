@@ -7,13 +7,14 @@
 #include <QDebug>
 #include <QDateTime>
 #include <QMouseEvent>
-#include <windows.h>
 #include <QWindow>
 #include <QGraphicsOpacityEffect>
 #include <QPropertyAnimation>
 #include<QPixmap>
 #include <iomanip>
 #include <iostream>
+#include "winsock2.h"
+#include <windows.h>
 
 #include "UltraFace.hpp"
 #include "GBHealth.hpp"
@@ -67,6 +68,7 @@ public:
     void pixmapSet(Ui::MainWindow *ui);
     void dateSet(Ui::MainWindow *ui);
     void page2_button1();
+    void test(int res);
 
 
 private slots:
@@ -74,11 +76,11 @@ private slots:
 
     void on_cal_button_clicked();
 
-    void on_pushButton_clicked();
-
     void on_page2_2button_clicked();
 
     void on_page2_3button_clicked();
+
+    void on_pushButton_2_clicked();
 
 
 

@@ -1,6 +1,9 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <windows.h>
+#include "netconnection.h"
+
+
+
 int t=0;
 int r=0;
 int bpm=0, spo2=0;
@@ -41,7 +44,6 @@ MainWindow::MainWindow(QWidget *parent)
     dateSet(ui);
     pixmapSet(ui);
 
-
 }
 
 MainWindow::~MainWindow()
@@ -57,20 +59,20 @@ void MainWindow::myfunction() // Operates in every 1 sec
 
     if( bpm==0 || minpress == 0 ){
         ui->label_23->setText("카메라를 봐주세요");
-        ui->pushButton->setText("초기 정보 측정중");
-        qDebug()<<"카메라를 봐주세요";
+        ui->pushButton_2->setText("초기 정보 측정중");
+        //qDebug()<<"카메라를 봐주세요";
         ui->page2_2button->setText("측정중");
-        qDebug()<<bpm2;
-        qDebug()<<bpm3;
+       // qDebug()<<bpm2;
+        //qDebug()<<bpm3;
         r=0;
     }
     else{
         ui->label_23->setText("거짓말 탐지중...");
-        ui->pushButton->setText("시작하기");
-        qDebug()<<"거짓말 탐지중";
+        ui->pushButton_2->setText("시작하기");
+        //qDebug()<<"거짓말 탐지중";
         ui->page2_2button->setText("결과보기");
-        qDebug()<<bpm2;
-        qDebug()<<bpm3;
+        //qDebug()<<bpm2;
+        //qDebug()<<bpm3;
         r=1;
 }
 
@@ -265,8 +267,8 @@ void MainWindow::sampling()
        // GB code. You should have these.
        GBHealth gb;
 
-       std::string face_detect_path = "C:\\Users\\kwang\\Documents\\qtlib\\model\\face_detection.onnx";
-       std::string landmark_path = "C:\\Users\\kwang\\Documents\\qtlib\\model\\landmark_detection.onnx";
+       std::string face_detect_path = "C:\\Users\\Kwon Geon\\Desktop\\screenMirrorTest\\screenMirrorTest\\model\\face_detection.onnx";
+       std::string landmark_path = "C:\\Users\\Kwon Geon\\Desktop\\screenMirrorTest\\screenMirrorTest\\model\\landmark_detection.onnx";
 
 
        int detect_interval = 8;            //얼굴인식 1초동안 실행 횟수
@@ -489,10 +491,6 @@ void MainWindow::on_cal_button_clicked()
 
 }
 
-void MainWindow::on_pushButton_clicked()
-{
-    page2_button1();
-}
 
 void MainWindow::on_page2_2button_clicked() // 결과확인버튼
 {
@@ -610,5 +608,13 @@ void MainWindow::page2_button1()
 
 }
 
+void MainWindow::test(int res)
+{
+    ui->label_date->setText(" LOGIN COMPLETE ");
+}
 
+void MainWindow::on_pushButton_2_clicked()
+{
+     page2_button1();
+}
 

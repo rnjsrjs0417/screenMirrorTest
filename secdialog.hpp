@@ -20,6 +20,8 @@ private slots:
 
     void on_pushButton_2_clicked();
 
+    void loginComplete(int a);
+
 private:
     Ui::SecDialog *ui;
     MainWindow *n;

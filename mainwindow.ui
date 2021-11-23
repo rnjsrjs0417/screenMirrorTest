@@ -188,7 +188,7 @@
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>-3840</y>
+       <y>0</y>
        <width>1080</width>
        <height>1920</height>
       </rect>
@@ -771,12 +771,12 @@ font-weight: bold;</string>
        <string> 추천 질문 리스트</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton">
+     <widget class="QPushButton" name="pushButton_2">
       <property name="geometry">
        <rect>
-        <x>419</x>
+        <x>420</x>
         <y>630</y>
-        <width>291</width>
+        <width>281</width>
         <height>81</height>
        </rect>
       </property>
@@ -999,7 +999,7 @@ font-weight: bold;</string>
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>0</y>
+       <y>-3840</y>
        <width>1080</width>
        <height>1920</height>
       </rect>

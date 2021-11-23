@@ -2,7 +2,7 @@
 #include <cstdlib>
 #include <netconnection.h>
 #include <recvthread.h>
-#include <mainwindow.h>
+#include <secdialog.hpp>
 
 #define TCP_PORT 16005
 using namespace std;
@@ -10,7 +10,7 @@ using namespace std;
 char buffer[10000];
 int i = 0 ;
 
-NetConnection::NetConnection(MainWindow* w, string server, void (MainWindow::*_callback)(int)){
+NetConnection::NetConnection(SecDialog* w, string server, void (SecDialog::*_callback)(int)){
     WSADATA wsaData;
 
     if (WSAStartup(MAKEWORD(2,2), &wsaData) != 0){
@@ -44,7 +44,7 @@ void NetConnection::make_socket(){
 }
 
 void NetConnection::thread_end(){
-    void(MainWindow::*pFunc)(int) = callback;
+    void(SecDialog::*pFunc)(int) = callback;
 
     (window->*pFunc)(123);
 }
