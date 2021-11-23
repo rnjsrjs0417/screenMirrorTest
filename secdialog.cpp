@@ -27,7 +27,7 @@ SecDialog::~SecDialog()
 
 void SecDialog::on_pushButton_clicked() // 이미 로그인 된 사람 클릭시
 {
-    n=new MainWindow(this);
+    n=new MainWindow(this,net);
     loginComplete(1);
 }
 
@@ -55,7 +55,8 @@ void SecDialog::on_pushButton_2_clicked()
 
     QString m = QString::number(net->get_devicecode());
     ui->pwd->setText(m);
-    n=new MainWindow(this);
+
+    n = new MainWindow(this,net);
 
 }
 

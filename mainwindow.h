@@ -21,6 +21,7 @@
 #include <opencv2/opencv.hpp>
 
 #include "ui_mainwindow.h"
+#include "netconnection.h"
 
 
 
@@ -34,6 +35,8 @@ QT_END_NAMESPACE
 
 class MainWindow : public QMainWindow
 {
+
+    NetConnection* net;
 
     bool mouseStat, page1_flag;
     int mouseClickPoint; // remeber only x point
@@ -58,7 +61,8 @@ public slots:
 
 
 public:
-    MainWindow(QWidget *parent = nullptr);
+    MainWindow(QWidget *parent = nullptr, NetConnection* net = nullptr);
+   // MainWindow(QWidget *parent, NetConnection* net);
     ~MainWindow();
     void mouseDoubleClickEvent(QMouseEvent *event) override;
     void mouseMoveEvent(QMouseEvent *event) override;
