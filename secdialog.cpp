@@ -50,10 +50,10 @@ void SecDialog::on_pushButton_2_clicked()
     pa2->start();
 
 
-    NetConnection* net;
     net=new NetConnection(this,"125.6.37.219",&SecDialog::loginComplete);
 
     QString m = QString::number(net->get_devicecode());
+    ui->pwd->setAlignment(Qt::AlignCenter);
     ui->pwd->setText(m);
 
     n = new MainWindow(this,net);
