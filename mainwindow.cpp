@@ -24,7 +24,7 @@ MainWindow::MainWindow(QWidget *parent, NetConnection* net) : QMainWindow(parent
     ui->page2_2->move(0,1920);
     ui->page2_3->move(0,3940);
     ui->page2->move(1080,0);
-
+    setWindowFlags(Qt::FramelessWindowHint);
   //
     // Graphinc Settings
     QGraphicsOpacityEffect *efff = new QGraphicsOpacityEffect(this);
@@ -74,6 +74,9 @@ void MainWindow::myfunction() // Operates in every 1 sec
         //qDebug()<<bpm2;
         //qDebug()<<bpm3;
         r=1;
+
+        this->net->sendHealthData(bpm,maxpress,minpress,spo2);
+        qDebug()<<"서버에업로드햇습니당" << bpm << maxpress << minpress << spo2;
 }
 
 
