@@ -13,6 +13,8 @@ int i = 0 ;
 
 NetConnection::NetConnection(SecDialog* w, string server, void (SecDialog::*_callback)(int)){
     WSADATA wsaData;
+    struct hostent *host;
+    SOCKADDR_IN http_SockAddr;
 
     if (WSAStartup(MAKEWORD(2,2), &wsaData) != 0){
         qDebug() << "WSAStartup failed.";
@@ -21,17 +23,6 @@ NetConnection::NetConnection(SecDialog* w, string server, void (SecDialog::*_cal
     server_url = server;
     window = w;
     callback = _callback;
-}
-
-NetConnection::~NetConnection(){
-    closesocket(TCP_Socket);
-    closesocket(HTTP_Socket);
-    WSACleanup();
-}
-
-void NetConnection::make_socket(){
-    SOCKADDR_IN sock_sockAddr, http_SockAddr;
-    struct hostent *host;
 
     HTTP_Socket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
     host = gethostbyname(server_url.c_str());
@@ -44,6 +35,17 @@ void NetConnection::make_socket(){
         qDebug() << "Could not connect HTTP server";
         return;
     }
+}
+
+NetConnection::~NetConnection(){
+    closesocket(TCP_Socket);
+    closesocket(HTTP_Socket);
+    WSACleanup();
+}
+
+void NetConnection::make_socket(){
+    SOCKADDR_IN sock_sockAddr;
+    struct hostent *host;
 
     TCP_Socket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
     host = gethostbyname(server_url.c_str());
@@ -79,6 +81,14 @@ int NetConnection::get_devicecode(){
     return atoi(buffer);
 }
 
+int NetConnection::load_user(string mid){
+    string q = "/validuser?id=" + mid;
+    map<string, string> res = http_request(q);
+    if((*res.find("_result")).second == "T")
+        if((*res.find("result")).second == "true") return 0;
+    return -1;
+}
+
 void NetConnection::cancel_code(){
     closesocket(TCP_Socket);
 }
@@ -89,7 +99,7 @@ int NetConnection::sendHealthData(int pulse, int max, int min, int spo2){
     map<string, string> res = http_request(q);
     if((*res.find("_result")).second == "T")
         if((*res.find("result")).second == "true") return 0;
-    return 1;
+    return -1;
 }
 
 map<string, string> NetConnection::http_request(string query){

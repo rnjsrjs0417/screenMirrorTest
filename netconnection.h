@@ -20,11 +20,12 @@ public:
     int get_devicecode();
     void cancel_code();
     int sendHealthData(int pulse, int max, int min, int spo2);
+    void thread_end();
+    int load_user(std::string mid);
 
 public:
     std::string id;
     std::string name;
-    void thread_end();
 
 private:
     void make_socket();
