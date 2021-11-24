@@ -11,20 +11,21 @@ int minpress=0, maxpress=0;
 float temper=0;
 int bpm2=0,maxpress2=0;
 int bpm3=0,maxpress3=0;
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
+MainWindow::MainWindow(QWidget *parent, NetConnection* net) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     page1_flag = true;
     // init settings etc
-
+    std::string arr[6];
+    arr[0]="abc";
+    this->net = net;
     ui->page1->move(0,0);
     ui->page2_1->move(0,0);
     ui->page2_2->move(0,1920);
     ui->page2_3->move(0,3940);
     ui->page2->move(1080,0);
 
+  //
     // Graphinc Settings
     QGraphicsOpacityEffect *efff = new QGraphicsOpacityEffect(this);
     ui->label_hello->setGraphicsEffect(efff);
@@ -40,10 +41,9 @@ MainWindow::MainWindow(QWidget *parent)
 //    if(SIGNAL(finished()))
 //        qDebug() << "hola has gone";
 
-
+    get_string(arr);
     dateSet(ui);
     pixmapSet(ui);
-
 }
 
 MainWindow::~MainWindow()
@@ -74,6 +74,9 @@ void MainWindow::myfunction() // Operates in every 1 sec
         //qDebug()<<bpm2;
         //qDebug()<<bpm3;
         r=1;
+
+        this->net->sendHealthData(bpm,maxpress,minpress,spo2);
+        qDebug()<<"서버에업로드햇습니당" << bpm << maxpress << minpress << spo2;
 }
 
 
@@ -267,8 +270,8 @@ void MainWindow::sampling()
        // GB code. You should have these.
        GBHealth gb;
 
-       std::string face_detect_path = "C:\\Users\\Kwon Geon\\Desktop\\screenMirrorTest\\screenMirrorTest\\model\\face_detection.onnx";
-       std::string landmark_path = "C:\\Users\\Kwon Geon\\Desktop\\screenMirrorTest\\screenMirrorTest\\model\\landmark_detection.onnx";
+       std::string face_detect_path = "C:\\Users\\Kwon Geon\\Documents\\GitHub\\screenMirrorTest\\model\\face_detection.onnx";
+       std::string landmark_path = "C:\\Users\\Kwon Geon\\Documents\\GitHub\\screenMirrorTest\\model\\landmark_detection.onnx";
 
 
        int detect_interval = 8;            //얼굴인식 1초동안 실행 횟수
@@ -616,5 +619,53 @@ void MainWindow::test(int res)
 void MainWindow::on_pushButton_2_clicked()
 {
      page2_button1();
+}
+
+
+void MainWindow::on_radioButton_clicked()
+{
+    QPropertyAnimation *pa1 = new QPropertyAnimation(ui->black,"geometry");
+    pa1->setEasingCurve(QEasingCurve::OutQuint);
+    pa1->setDuration(600);
+    pa1->setStartValue(ui->black->geometry());
+    pa1->setEndValue(QRect(0,0,1080,1920));
+    pa1->start();
+}
+
+
+void MainWindow::on_pushButton_clicked()
+{
+    QPropertyAnimation *pa1 = new QPropertyAnimation(ui->black,"geometry");
+    pa1->setEasingCurve(QEasingCurve::OutQuint);
+    pa1->setDuration(600);
+    pa1->setStartValue(ui->black->geometry());
+    pa1->setEndValue(QRect(-1080,0,1080,1920));
+    pa1->start();
+}
+
+
+
+
+void MainWindow::on_pushButton_3_clicked()
+{
+    QPropertyAnimation *pa1 = new QPropertyAnimation(ui->black,"geometry");
+    pa1->setEasingCurve(QEasingCurve::OutQuint);
+    pa1->setDuration(600);
+    pa1->setStartValue(ui->black->geometry());
+    pa1->setEndValue(QRect(0,0,1080,1920));
+    pa1->start();
+}
+
+void MainWindow::get_string(std::string arr[])
+{
+
+    ui->pushButton_4->setText(QString::fromStdString(arr[0]));
+    ui->pushButton_5->setText(QString::fromStdString(arr[0]));
+    ui->pushButton_6->setText(QString::fromStdString(arr[0]));
+    ui->pushButton_7->setText(QString::fromStdString(arr[0]));
+    ui->pushButton_8->setText(QString::fromStdString(arr[0]));
+    ui->pushButton_9->setText(QString::fromStdString(arr[0]));
+
+
 }
 

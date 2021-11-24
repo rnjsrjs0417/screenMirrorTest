@@ -21,6 +21,7 @@
 #include <opencv2/opencv.hpp>
 
 #include "ui_mainwindow.h"
+#include "netconnection.h"
 
 
 
@@ -34,6 +35,8 @@ QT_END_NAMESPACE
 
 class MainWindow : public QMainWindow
 {
+
+    NetConnection* net;
 
     bool mouseStat, page1_flag;
     int mouseClickPoint; // remeber only x point
@@ -58,7 +61,7 @@ public slots:
 
 
 public:
-    MainWindow(QWidget *parent = nullptr);
+    MainWindow(QWidget *parent = nullptr, NetConnection* net = nullptr);
     ~MainWindow();
     void mouseDoubleClickEvent(QMouseEvent *event) override;
     void mouseMoveEvent(QMouseEvent *event) override;
@@ -69,7 +72,7 @@ public:
     void dateSet(Ui::MainWindow *ui);
     void page2_button1();
     void test(int res);
-
+    void get_string(std::string arr[]);
 
 private slots:
     void on_widget_calendar_clicked(const QDate &date);
@@ -83,6 +86,12 @@ private slots:
     void on_pushButton_2_clicked();
 
 
+
+    void on_radioButton_clicked();
+
+    void on_pushButton_clicked();
+
+    void on_pushButton_3_clicked();
 
 private:
     Ui::MainWindow *ui;
