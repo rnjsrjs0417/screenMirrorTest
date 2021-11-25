@@ -24,7 +24,7 @@ MainWindow::MainWindow(QWidget *parent, NetConnection* net) : QMainWindow(parent
     ui->page2_2->move(0,1920);
     ui->page2_3->move(0,3940);
     ui->page2->move(1080,0);
-
+    setWindowFlags(Qt::FramelessWindowHint);
   //
     // Graphinc Settings
     QGraphicsOpacityEffect *efff = new QGraphicsOpacityEffect(this);

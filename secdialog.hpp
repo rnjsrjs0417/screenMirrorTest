@@ -11,6 +11,8 @@ class SecDialog : public QDialog
 {
     Q_OBJECT
     QString name[5], id[5];
+    int isNewcome=0;
+    int userNum=0;
 
 public:
     explicit SecDialog(QWidget *parent = nullptr);
@@ -24,9 +26,9 @@ private slots:
     void loadUserInfo();
     void saveUserInfo();
 
-    void login_select(int userNum);
-    void login_createAccount(int userNum);
-    void login_signIn(int userNum);
+    void login_select();
+    void login_createAccount();
+    void login_signIn();
     void loginComplete(int a);
     void loginComplete2(int a);
 

@@ -37,6 +37,7 @@ set(PROJECT_SOURCES
         secdialog.hpp
         secdialog.cpp
         secdialog.ui
+        userInfo.txt
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

@@ -101,6 +101,7 @@ background-color: black;
 border: 5px solid white;
 font-size: 50px;
 font-weight: bold;
+border-radius: 10px;
 </string>
     </property>
     <property name="text">
@@ -122,6 +123,7 @@ background-color: black;
 border: 5px solid white;
 font-size: 50px;
 font-weight: bold;
+border-radius: 10px;
 </string>
     </property>
     <property name="text">
@@ -143,6 +145,7 @@ background-color: black;
 border: 5px solid white;
 font-size: 50px;
 font-weight: bold;
+border-radius: 10px;
 </string>
     </property>
     <property name="text">
@@ -203,6 +206,63 @@ font-weight: bold;
     </property>
     <property name="text">
      <string>접속할 계정을 선택하여 주십시오.</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>400</y>
+      <width>101</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: white;
+background-color: black;
+font-weight: bold;
+</string>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>470</x>
+      <y>400</y>
+      <width>101</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: white;
+background-color: black;
+font-weight: bold;
+</string>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>730</x>
+      <y>400</y>
+      <width>101</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: white;
+background-color: black;
+font-weight: bold;
+</string>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
     </property>
    </widget>
   </widget>
