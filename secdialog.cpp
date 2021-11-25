@@ -144,7 +144,7 @@ void SecDialog::login_signIn()
 }
 void SecDialog::loginComplete2(int a)
 {
-    if(isNewcome == 1)
+    if(isNewcome == 1)//file modify
     {
         //name[userNum] = newName;
         //id[userNum] = newId;
@@ -189,9 +189,6 @@ void SecDialog::login_createAccount()
 
 void SecDialog::loginComplete(int a)
 {
-    // file modify
-
-
     n->show();
     n->sampling();
 }

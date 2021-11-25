@@ -40,7 +40,7 @@ class MainWindow : public QMainWindow
 
     bool mouseStat, page1_flag;
     int mouseClickPoint; // remeber only x point
-
+    int errCheck=0;
     //Curor value
     int cursor_xPos, cursor_yPos;
 
