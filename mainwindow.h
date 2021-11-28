@@ -40,7 +40,7 @@ class MainWindow : public QMainWindow
 
     bool mouseStat, page1_flag;
     int mouseClickPoint; // remeber only x point
-
+    int errCheck=0;
     //Curor value
     int cursor_xPos, cursor_yPos;
 
@@ -92,6 +92,8 @@ private slots:
     void on_pushButton_clicked();
 
     void on_pushButton_3_clicked();
+
+    void on_pushButton_10_clicked();
 
 private:
     Ui::MainWindow *ui;

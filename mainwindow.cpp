@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "netconnection.h"
-
+#include <QThread>
 
 
 int t=0;
@@ -24,6 +24,8 @@ MainWindow::MainWindow(QWidget *parent, NetConnection* net) : QMainWindow(parent
     ui->page2_2->move(0,1920);
     ui->page2_3->move(0,3940);
     ui->page2->move(1080,0);
+    ui->label_23->setText("");
+
     setWindowFlags(Qt::FramelessWindowHint);
   //
     // Graphinc Settings
@@ -57,26 +59,38 @@ void MainWindow::myfunction() // Operates in every 1 sec
     time_text = time.toString("AP hh : mm ");
     ui->label_date_time->setText(time_text);
 
-    if( bpm==0 || minpress == 0 ){
-        ui->label_23->setText("카메라를 봐주세요");
+    if( errCheck != 0 || r==0){// -4 얼굴이중앙에안있을때 , -1 : 얼굴이 없을때
+
         ui->pushButton_2->setText("초기 정보 측정중");
         //qDebug()<<"카메라를 봐주세요";
-        ui->page2_2button->setText("측정중");
+
        // qDebug()<<bpm2;
         //qDebug()<<bpm3;
-        r=0;
+        if(errCheck == 0)
+        {
+             ui->checking->setText("측정 중입니다, 움직이지 마세요");
+             ui->page2_2button->setText("움직이지 마세요");
+        }
+        else
+        {
+             ui->checking->setText("얼굴을 찾을 수 없습니다");
+             ui->page2_2button->setText("카메라를 봐주세요");
+        }
+
     }
-    else{
-        ui->label_23->setText("거짓말 탐지중...");
+    else if(r==1){
         ui->pushButton_2->setText("시작하기");
         //qDebug()<<"거짓말 탐지중";
+
         ui->page2_2button->setText("결과보기");
         //qDebug()<<bpm2;
         //qDebug()<<bpm3;
-        r=1;
+
+        ui->checking->setText("");//생체 정보 측정 완료, 실시간 갱신중
 
         this->net->sendHealthData(bpm,maxpress,minpress,spo2);
         qDebug()<<"서버에업로드햇습니당" << bpm << maxpress << minpress << spo2;
+
 }
 
 
@@ -314,14 +328,10 @@ void MainWindow::sampling()
            int nowTime = (cv::getTickCount()) / cv::getTickFrequency();
            std::cout<<cv::format("TIME: %.0fs", (double)(nowTime-startTime));
 
-            bpm = 0;
-            temper = 0;
-            minpress=0;
-            maxpress =0;
-
            // SAMPLE data to values
            if (gb.bpm_ > 0)
            {
+
                std::cout <<cv::format(", fps: %2.1f / BPM: %3d bpm", gb.fps_, gb.bpm_);
                 // beat per minutes
                 bpm = gb.bpm_;
@@ -343,7 +353,7 @@ void MainWindow::sampling()
 
                if (gb.blood_pressure_systolic_ > 0){
                    std::cout << ", blood pressure: " << gb.blood_pressure_diastolic_ <<" ~ "<< gb.blood_pressure_systolic_ << " mmHg";
-
+                    r=1;
                    minpress = gb.blood_pressure_diastolic_;
                    maxpress = gb.blood_pressure_systolic_;
                    //maxpress2=gb.blood_pressure_systolic_;
@@ -359,6 +369,8 @@ void MainWindow::sampling()
                     }
                }
            }
+           else
+               r=0;
            std::cout << std::endl;
        }, 1000);
 
@@ -388,10 +400,11 @@ void MainWindow::sampling()
             cv::Rect2f face = ultra_face->Get_share_face_();
            #endif
 
+
            #ifdef IS_LANDMARK
-               gb.CallErr(gb.Get(mat_bgr, params, face));
+               gb.CallErr(errCheck = gb.Get(mat_bgr, params, face));
            #else
-               gb.CallErr(gb.Get(mat_bgr, face));
+               gb.CallErr(errCheck = gb.Get(mat_bgr, face));
            #endif
 
        //    cv::rectangle(mat_bgr, face, cv::Scalar(0, 255, 0), 1);
@@ -504,16 +517,25 @@ void MainWindow::on_page2_2button_clicked() // 결과확인버튼
 
     // to page3
     ui->page2_1->move(0,-3840);
-    ui->page2_2->move(0,-1920);
+
+    //ui->page2_2->move(0,-1920);
+    QPropertyAnimation *ppp1 = new QPropertyAnimation(ui->page2_2,"geometry");
+    ppp1->setEasingCurve(QEasingCurve::OutQuint);
+    ppp1->setDuration(200);
+
+    ppp1->setStartValue(ui->page2_2->geometry());
+    ppp1->setEndValue(QRect(0,-1920,1080,1920));
+    ppp1->start();
 
     QPropertyAnimation *ppp = new QPropertyAnimation(ui->page2_3,"geometry");
     ppp->setEasingCurve(QEasingCurve::OutQuint);
     ppp->setDuration(200);
 
-
     ppp->setStartValue(ui->page2_3->geometry());
     ppp->setEndValue(QRect(0,0,1080,1920));
     ppp->start();
+
+
 
 
     ui->label_16->setText(QString::number(bpm2));
@@ -548,7 +570,15 @@ void MainWindow::on_page2_3button_clicked() //
 
 
     ui->page2_2->move(0,1920);
-    ui->page2_3->move(0,3840);
+    //ui->page2_3->move(0,3840);
+
+    QPropertyAnimation *pppp1 = new QPropertyAnimation(ui->page2_3,"geometry");
+    pppp1->setEasingCurve(QEasingCurve::OutQuint);
+    pppp1->setDuration(200);
+
+    pppp1->setStartValue(ui->page2_3->geometry());
+    pppp1->setEndValue(QRect(0,3840,1080,1920));
+    pppp1->start();
 
 
 }
@@ -559,10 +589,19 @@ void MainWindow::page2_button1()
 
     bpm2=bpm;
     maxpress2=maxpress;
-
+    for(int k=0;k<10000;k++)
+        r=0;
     int n=0;
     qDebug()<< "startbutton clicked ";
-    ui->page2_1->move(0,-1920);
+    // ui->page2_1->move(0,-1920);
+
+    QPropertyAnimation *pp1 = new QPropertyAnimation(ui->page2_1,"geometry");
+    pp1->setEasingCurve(QEasingCurve::OutQuint);
+    pp1->setDuration(200);
+
+    pp1->setStartValue(ui->page2_1->geometry());
+    pp1->setEndValue(QRect(0,-1920,1080,1920));
+    pp1->start();
 
     // ui->page2_2->move(0,0);
 
@@ -576,26 +615,33 @@ void MainWindow::page2_button1()
 
     ui->page2_3->move(0,1920);
 
-    QGraphicsOpacityEffect *efff = new QGraphicsOpacityEffect(this);
-    ui->page2_2button->setGraphicsEffect(efff);
-    QPropertyAnimation *aa = new QPropertyAnimation(efff,"opacity");
+    QGraphicsOpacityEffect *eefff = new QGraphicsOpacityEffect(this);
+    ui->pushButton_10->setGraphicsEffect(eefff);
+    QPropertyAnimation *aa1 = new QPropertyAnimation(eefff,"opacity");
+    //ui->label_hello->setGraphicsEffect(efff);
+    aa1->setDuration(15000);
+    aa1->setStartValue(1);
+    aa1->setEndValue(0);
+    aa1->setEasingCurve(QEasingCurve::OutBack);
+    aa1->start(QPropertyAnimation::DeleteWhenStopped);
+    connect(aa1,SIGNAL(finished()),this,SLOT(hideThisWidget()));
 
-//    QGraphicsOpacityEffect *dfff = new QGraphicsOpacityEffect(this);
-//    ui->page2_2button->setGraphicsEffect(dfff);
-//    QPropertyAnimation *bb = new QPropertyAnimation(dfff,"opacity");
 
-    qDebug()<< "count start ";
-    aa->setDuration(8000);
-    aa->setStartValue(0);
-    aa->setEndValue(1);
+//    QGraphicsOpacityEffect *efff = new QGraphicsOpacityEffect(this);
+//    ui->page2_2button->setGraphicsEffect(efff);
+//    QPropertyAnimation *aa = new QPropertyAnimation(efff,"opacity");
 
-//    bb->setDuration(100);
-//    bb->setStartValue(0);
-//    bb->setEndValue(1);
 
-    aa->setEasingCurve(QEasingCurve::InExpo);
-    aa->start();
-    connect(aa,SIGNAL(finished()),this,SLOT(hideThisWidget));
+
+//    qDebug()<< "count start ";
+//    aa->setDuration(8000);
+//    aa->setStartValue(0);
+//    aa->setEndValue(1);
+
+
+//    aa->setEasingCurve(QEasingCurve::InExpo);
+//    aa->start();
+//    connect(aa,SIGNAL(finished()),this,SLOT(hideThisWidget));
 
 //    if(SIGNAL(finished()))
 //    {
@@ -667,5 +713,11 @@ void MainWindow::get_string(std::string arr[])
     ui->pushButton_9->setText(QString::fromStdString(arr[0]));
 
 
+}
+
+
+void MainWindow::on_pushButton_10_clicked()
+{
+    on_page2_2button_clicked();
 }
 

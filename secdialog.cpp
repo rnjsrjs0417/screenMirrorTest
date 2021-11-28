@@ -14,6 +14,7 @@ SecDialog::SecDialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    userNum = 0 ;
     ui->page1->move(0,0);
     ui->page2->move(PAGE_WIDTH,0);
 
@@ -21,11 +22,11 @@ SecDialog::SecDialog(QWidget *parent) :
 
     net=new NetConnection(this,"125.6.37.219",&SecDialog::loginComplete2);
 
-    name[1] = "dsf"; name[2] = "sdf"; name[3] = "asdf";
+    name[1] = ""; name[2] = ""; name[3] = "";
     id[1] = ""; id[2] = ""; id[3] = "";
     // LOAD user info with txt file communication
     loadUserInfo();
-    saveUserInfo();
+    //saveUserInfo();
 
 }
 
@@ -38,8 +39,8 @@ SecDialog::~SecDialog()
 void SecDialog::loadUserInfo()
 {
     //debug code
-    name[1] = "은구"; name[2] = "+"; name[3] = "+";
-    id[1] = "dmsrn135"; id[2] = ""; id[3] = "";
+//    name[1] = "은구"; name[2] = "+"; name[3] = "+";
+//    id[1] = "dmsrn135"; id[2] = ""; id[3] = "";
 
     //file input
     QFile file("C:\\Users\\kwang\\Documents\\screenMirrorTest\\userInfo.txt");
@@ -59,11 +60,16 @@ void SecDialog::loadUserInfo()
 
 
     //label set
+
     ui->pushButton->setText(name[1]);
     ui->pushButton_2->setText(name[2]);
     ui->pushButton_3->setText(name[3]);
     ui->label_2->setAlignment(Qt::AlignCenter);
     ui->label_2->setText(id[1]);
+    ui->label_3->setAlignment(Qt::AlignCenter);
+    ui->label_3->setText(id[2]);
+    ui->label_4->setAlignment(Qt::AlignCenter);
+    ui->label_4->setText(id[3]);
     file.close();
 }
 
@@ -92,40 +98,65 @@ void SecDialog::saveUserInfo()
 
 
 void SecDialog::on_pushButton_clicked() // 이미 로그인 된 사람 클릭시
-{
-    login_select(1);
+{   userNum = 1;
+    login_select();
+
 }
 void SecDialog::on_pushButton_2_clicked()
 {
-     login_select(2);
+     userNum = 2;
+     login_select();
+
 }
 void SecDialog::on_pushButton_3_clicked()
 {
-     login_select(3);
+     userNum = 3;
+     login_select();
+
 }
 
 
-void SecDialog::login_select(int userNum)
+void SecDialog::login_select()
 {
     if(name[userNum] == "+")
-        login_createAccount(userNum);
+    {
+        qDebug() << "newcomer hi fuck";
+        login_createAccount();
+
+    }
     else
-        login_signIn(userNum);
+    {
+        qDebug() << "not newcomer hi sex";
+        login_signIn();
+    }
+
 }
 
 
 // if user
-void SecDialog::login_signIn(int userNum)
+void SecDialog::login_signIn()
 {
+//    MainWindow* m;
+//    m = new MainWindow();
+//    m->show();
+
     n=new MainWindow(this,net);
     n->show();
     n->sampling();
+
+
     //net=new NetConnection(this,"125.6.37.219",&SecDialog::loginComplete2);
     // net-> 한방에로그인( name[userNum] ) ;
 
 }
 void SecDialog::loginComplete2(int a)
 {
+    if(isNewcome == 1)//file modify
+    {
+        //name[userNum] = newName;
+        //id[userNum] = newId;
+        //saveInfo();
+    }
     n->show();
     n->sampling();
 }
@@ -133,8 +164,10 @@ void SecDialog::loginComplete2(int a)
 
 
 // if new comer
-void SecDialog::login_createAccount(int userNum)
+void SecDialog::login_createAccount()
 {
+    isNewcome = 1;
+
     // set page2
     QPropertyAnimation *pa1 = new QPropertyAnimation(ui->page1,"geometry");
     QPropertyAnimation *pa2 = new QPropertyAnimation(ui->page2,"geometry");
@@ -163,9 +196,6 @@ void SecDialog::login_createAccount(int userNum)
 
 void SecDialog::loginComplete(int a)
 {
-    // file modify
-
-
     n->show();
     n->sampling();
 }

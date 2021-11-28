@@ -141,7 +141,7 @@
    <widget class="QWidget" name="page2" native="true">
     <property name="geometry">
      <rect>
-      <x>1080</x>
+      <x>0</x>
       <y>0</y>
       <width>1080</width>
       <height>1920</height>
@@ -188,7 +188,7 @@
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>0</y>
+       <y>-1920</y>
        <width>1080</width>
        <height>1920</height>
       </rect>
@@ -801,7 +801,7 @@ font-weight: bold;</string>
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>1920</y>
+       <y>0</y>
        <width>1080</width>
        <height>1920</height>
       </rect>
@@ -880,7 +880,7 @@ font-weight: bold;
 border-radius: 10px;</string>
       </property>
       <property name="text">
-       <string>결과보기</string>
+       <string>움직이지 마세요</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_23">
@@ -998,6 +998,26 @@ border-radius: 10px;</string>
       </property>
       <property name="text">
        <string>거짓말 탐지기</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_10">
+      <property name="geometry">
+       <rect>
+        <x>430</x>
+        <y>650</y>
+        <width>211</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: white;
+background-color: black;
+border: 1px white;
+font-size: 25px;
+font-weight: bold;</string>
+      </property>
+      <property name="text">
+       <string/>
       </property>
      </widget>
     </widget>
@@ -1887,7 +1907,7 @@ border-radius: 10px;</string>
     </property>
     <property name="geometry">
      <rect>
-      <x>0</x>
+      <x>-1080</x>
       <y>0</y>
       <width>1080</width>
       <height>1920</height>
@@ -3001,68 +3021,6 @@ font: &quot;C:/Users/kwang/Desktop/font.ttf&quot;;</string>
       <string/>
      </property>
     </widget>
-    <widget class="QLabel" name="label">
-     <property name="geometry">
-      <rect>
-       <x>70</x>
-       <y>880</y>
-       <width>211</width>
-       <height>51</height>
-      </rect>
-     </property>
-     <property name="palette">
-      <palette>
-       <active>
-        <colorrole role="WindowText">
-         <brush brushstyle="SolidPattern">
-          <color alpha="255">
-           <red>255</red>
-           <green>255</green>
-           <blue>255</blue>
-          </color>
-         </brush>
-        </colorrole>
-       </active>
-       <inactive>
-        <colorrole role="WindowText">
-         <brush brushstyle="SolidPattern">
-          <color alpha="255">
-           <red>255</red>
-           <green>255</green>
-           <blue>255</blue>
-          </color>
-         </brush>
-        </colorrole>
-       </inactive>
-       <disabled>
-        <colorrole role="WindowText">
-         <brush brushstyle="SolidPattern">
-          <color alpha="255">
-           <red>120</red>
-           <green>120</green>
-           <blue>120</blue>
-          </color>
-         </brush>
-        </colorrole>
-       </disabled>
-      </palette>
-     </property>
-     <property name="font">
-      <font>
-       <family>HY헤드라인M</family>
-       <pointsize>30</pointsize>
-       <weight>50</weight>
-       <italic>false</italic>
-       <bold>false</bold>
-      </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font: &quot;C:/Users/kwang/Desktop/font.ttf&quot;;</string>
-     </property>
-     <property name="text">
-      <string>오늘 할 일</string>
-     </property>
-    </widget>
     <widget class="QLabel" name="label_7">
      <property name="geometry">
       <rect>
@@ -3128,8 +3086,8 @@ font: &quot;C:/Users/kwang/Desktop/font.ttf&quot;;</string>
     <widget class="QLabel" name="label_hello">
      <property name="geometry">
       <rect>
-       <x>430</x>
-       <y>290</y>
+       <x>460</x>
+       <y>430</y>
        <width>441</width>
        <height>200</height>
       </rect>
@@ -3940,27 +3898,93 @@ font-weight: bold;
      </property>
      <property name="styleSheet">
       <string notr="true"> border-radius: 20px;
-background-color: white;
+background-color: black;
 border: 5px solid white;
 font-size: 25px;
 font-weight: bold;
+
 </string>
      </property>
      <property name="text">
       <string/>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_4">
+    <widget class="QLabel" name="checking">
      <property name="geometry">
       <rect>
-       <x>80</x>
-       <y>970</y>
-       <width>221</width>
-       <height>28</height>
+       <x>465</x>
+       <y>1630</y>
+       <width>251</width>
+       <height>41</height>
       </rect>
      </property>
-     <property name="styleSheet">
-      <string notr="true">color: white;
+     <property name="palette">
+      <palette>
+       <active>
+        <colorrole role="WindowText">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>255</red>
+           <green>255</green>
+           <blue>255</blue>
+          </color>
+         </brush>
+        </colorrole>
+       </active>
+       <inactive>
+        <colorrole role="WindowText">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>255</red>
+           <green>255</green>
+           <blue>255</blue>
+          </color>
+         </brush>
+        </colorrole>
+       </inactive>
+       <disabled>
+        <colorrole role="WindowText">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>120</red>
+           <green>120</green>
+           <blue>120</blue>
+          </color>
+         </brush>
+        </colorrole>
+       </disabled>
+      </palette>
+     </property>
+     <property name="font">
+      <font>
+       <family>HY헤드라인M</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>측정 정보</string>
+     </property>
+    </widget>
+    <widget class="QWidget" name="widget" native="true">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>810</y>
+       <width>231</width>
+       <height>721</height>
+      </rect>
+     </property>
+     <widget class="QPushButton" name="pushButton_9">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>440</y>
+        <width>221</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: white;
 background-color: black;
 
 font-weight: bold;
@@ -3968,115 +3992,115 @@ border-bottom-width: 1px;
 border-bottom-style: solid;
 border-radius: 0px;
 </string>
-     </property>
-     <property name="text">
-      <string>PushButton</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pushButton_5">
-     <property name="geometry">
-      <rect>
-       <x>80</x>
-       <y>1020</y>
-       <width>221</width>
-       <height>28</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: white;
+      </property>
+      <property name="text">
+       <string>PushButton</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_8">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>390</y>
+        <width>221</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: white;
+background-color: black;
+
+font-weight: bold;
+border-bottom-width: 1px;
+border-bottom-style: solid;
+border-radius: 0px;
+
+</string>
+      </property>
+      <property name="text">
+       <string>PushButton</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_7">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>340</y>
+        <width>221</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: white;
+background-color: black;
+
+font-weight: bold;
+border-bottom-width: 1px;
+border-bottom-style: solid;
+border-radius: 0px;
+
+
+</string>
+      </property>
+      <property name="text">
+       <string>PushButton</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_6">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>290</y>
+        <width>221</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: white;
 background-color: black;
 
 font-weight: bold;
 border-bottom-width: 1px;
 border-bottom-style: solid;
 border-radius: 0px;</string>
-     </property>
-     <property name="text">
-      <string>PushButton</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pushButton_6">
-     <property name="geometry">
-      <rect>
-       <x>80</x>
-       <y>1070</y>
-       <width>221</width>
-       <height>28</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: white;
+      </property>
+      <property name="text">
+       <string>PushButton</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_5">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>240</y>
+        <width>221</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: white;
 background-color: black;
 
 font-weight: bold;
 border-bottom-width: 1px;
 border-bottom-style: solid;
 border-radius: 0px;</string>
-     </property>
-     <property name="text">
-      <string>PushButton</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pushButton_7">
-     <property name="geometry">
-      <rect>
-       <x>80</x>
-       <y>1120</y>
-       <width>221</width>
-       <height>28</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: white;
-background-color: black;
-
-font-weight: bold;
-border-bottom-width: 1px;
-border-bottom-style: solid;
-border-radius: 0px;
-
-
-</string>
-     </property>
-     <property name="text">
-      <string>PushButton</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pushButton_8">
-     <property name="geometry">
-      <rect>
-       <x>80</x>
-       <y>1170</y>
-       <width>221</width>
-       <height>28</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: white;
-background-color: black;
-
-font-weight: bold;
-border-bottom-width: 1px;
-border-bottom-style: solid;
-border-radius: 0px;
-
-</string>
-     </property>
-     <property name="text">
-      <string>PushButton</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pushButton_9">
-     <property name="geometry">
-      <rect>
-       <x>80</x>
-       <y>1220</y>
-       <width>221</width>
-       <height>28</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: white;
+      </property>
+      <property name="text">
+       <string>PushButton</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_4">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>190</y>
+        <width>221</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: white;
 background-color: black;
 
 font-weight: bold;
@@ -4084,10 +4108,73 @@ border-bottom-width: 1px;
 border-bottom-style: solid;
 border-radius: 0px;
 </string>
-     </property>
-     <property name="text">
-      <string>PushButton</string>
-     </property>
+      </property>
+      <property name="text">
+       <string>PushButton</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>90</y>
+        <width>211</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="palette">
+       <palette>
+        <active>
+         <colorrole role="WindowText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+        </active>
+        <inactive>
+         <colorrole role="WindowText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+        </inactive>
+        <disabled>
+         <colorrole role="WindowText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>120</red>
+            <green>120</green>
+            <blue>120</blue>
+           </color>
+          </brush>
+         </colorrole>
+        </disabled>
+       </palette>
+      </property>
+      <property name="font">
+       <font>
+        <family>HY헤드라인M</family>
+        <pointsize>30</pointsize>
+        <weight>50</weight>
+        <italic>false</italic>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: &quot;C:/Users/kwang/Desktop/font.ttf&quot;;</string>
+      </property>
+      <property name="text">
+       <string>오늘 할 일</string>
+      </property>
+     </widget>
     </widget>
     <zorder>cal_button</zorder>
     <zorder>label_date_time</zorder>
@@ -4104,7 +4191,6 @@ border-radius: 0px;
     <zorder>label_black</zorder>
     <zorder>label_s</zorder>
     <zorder>label_black3</zorder>
-    <zorder>label</zorder>
     <zorder>label_7</zorder>
     <zorder>label_hello</zorder>
     <zorder>label_10</zorder>
@@ -4114,12 +4200,8 @@ border-radius: 0px;
     <zorder>label_21</zorder>
     <zorder>radioButton</zorder>
     <zorder>pushButton_3</zorder>
-    <zorder>pushButton_4</zorder>
-    <zorder>pushButton_5</zorder>
-    <zorder>pushButton_6</zorder>
-    <zorder>pushButton_7</zorder>
-    <zorder>pushButton_8</zorder>
-    <zorder>pushButton_9</zorder>
+    <zorder>checking</zorder>
+    <zorder>widget</zorder>
    </widget>
    <widget class="QWidget" name="black" native="true">
     <property name="geometry">
