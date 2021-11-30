@@ -37,7 +37,6 @@ set(PROJECT_SOURCES
         secdialog.hpp
         secdialog.cpp
         secdialog.ui
-        userInfo.txt
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -98,6 +97,8 @@ TARGET_LINK_LIBRARIES( ${ProjectId}
     PRIVATE ${gbFace}
     PRIVATE ${OpenCV_LIBS}
 )
+find_package(Qt6 COMPONENTS Network REQUIRED)
+target_link_libraries(${ProjectId} PRIVATE Qt6::Network)
 
 IF(WIN32)
 TARGET_LINK_LIBRARIES(${ProjectId}

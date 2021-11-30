@@ -8,54 +8,15 @@
 #define TCP_PORT 16005
 using namespace std;
 
-char buffer[10000];
 int i = 0 ;
 
-NetConnection::NetConnection(SecDialog* w, string server, void (SecDialog::*_callback)(int)){
-    WSADATA wsaData;
-
-    if (WSAStartup(MAKEWORD(2,2), &wsaData) != 0){
-        qDebug() << "WSAStartup failed.";
-    }
-
+NetConnection::NetConnection(SecDialog* w, string server) : QObject(w){
+    manager = new QNetworkAccessManager(this);
     server_url = server;
     window = w;
-    callback = _callback;
 }
 
 NetConnection::~NetConnection(){
-    closesocket(TCP_Socket);
-    closesocket(HTTP_Socket);
-    WSACleanup();
-}
-
-void NetConnection::make_socket(){
-    SOCKADDR_IN sock_sockAddr, http_SockAddr;
-    struct hostent *host;
-
-    HTTP_Socket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
-    host = gethostbyname(server_url.c_str());
-
-    http_SockAddr.sin_port=htons(HTTP_PORT);
-    http_SockAddr.sin_family=AF_INET;
-    http_SockAddr.sin_addr.s_addr = *((unsigned long*)host->h_addr);
-
-    if(connect(HTTP_Socket,(SOCKADDR*)(&http_SockAddr),sizeof(http_SockAddr)) != 0){
-        qDebug() << "Could not connect HTTP server";
-        return;
-    }
-
-    TCP_Socket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
-    host = gethostbyname(server_url.c_str());
-
-    sock_sockAddr.sin_port=htons(TCP_PORT);
-    sock_sockAddr.sin_family=AF_INET;
-    sock_sockAddr.sin_addr.s_addr = *((unsigned long*)host->h_addr);
-
-    if(connect(TCP_Socket,(SOCKADDR*)(&sock_sockAddr),sizeof(sock_sockAddr)) != 0){
-        qDebug() << "Could not connect TCP server";
-        return;
-    }
 }
 
 void NetConnection::thread_end(){
@@ -64,23 +25,100 @@ void NetConnection::thread_end(){
     (window->*pFunc)(123);
 }
 
-int NetConnection::get_devicecode(){
+int NetConnection::get_devicecode(void (SecDialog::*_callback)(int)){
     char b[] = "device";
-    make_socket();
-    send(TCP_Socket, b, strlen(b), 0);
+    callback = _callback;
 
-    if(recv(TCP_Socket, buffer, sizeof(buffer), 0) <= 0){
-        return -1;
-    }
+    socket = new QTcpSocket(this);
+    socket->connectToHost(server_url.c_str(), 16005);
+    socket->waitForConnected();
+    socket->write("device");
+    socket->waitForReadyRead(30000);
 
-    RecvThread* rt = new RecvThread(this, &TCP_Socket);
-    rt->start();
+    QString str(socket->readAll());
 
-    return atoi(buffer);
+    connect(socket, SIGNAL(readyRead()), this, SLOT(ready2readCode()));
+
+    return atoi(str.toStdString().c_str());
 }
 
-void NetConnection::cancel_code(){
-    closesocket(TCP_Socket);
+void NetConnection::load_user(string mid, void (SecDialog::*_callback)(int)){
+    string q = "/validuser?id=" + mid;
+    callback = _callback;
+
+    string url = "http://" + server_url + q;
+    qDebug() << url.c_str();
+    QUrl serviceURL(url.c_str());
+    QNetworkRequest request(serviceURL);
+
+    reply = manager->get(request);
+    connect(reply, SIGNAL(readyRead()), this, SLOT(ready2read()));
+}
+
+int NetConnection::sendHealthData(int pulse, int max, int min, int spo2){
+    string q = ":16002/addHealth?id=" + id + "&pulse=" + to_string(pulse) + "&max=" + to_string(max) + "&min=" + to_string(min) + "&spo2=" + to_string(spo2);
+
+    string url = "http://" + server_url + q;
+
+    QUrl serviceURL(url.c_str());
+    QNetworkRequest request(serviceURL);
+
+    reply = manager->get(request);
+    return 0;
+}
+
+void NetConnection::new_load_user(string str){
+    manager = new QNetworkAccessManager(this);
+
+    string url = server_url + str;
+    QUrl serviceURL(url.c_str());
+    QNetworkRequest request(serviceURL);
+
+    reply = manager->get(request);
+
+}
+
+void NetConnection::ready2read(){
+    QJsonDocument document = QJsonDocument::fromJson(reply->readAll());
+    QJsonObject object = document.object();
+
+    auto value = object.value("result");
+    bool result = value.toBool();
+
+    if(result){
+        void(SecDialog::*pFunc)(int) = callback;
+
+        (window->*pFunc)(123);
+    }
+//    QJsonValue value = object.value("agentsArray");
+//    QJsonArray array = value.toArray();
+}
+
+void NetConnection::ready2readCode(){
+    QString data_ = socket->readAll();
+    string data = data_.toStdString();
+    int is_id = 1;
+    string id_temp, name_temp;
+    if(data.size() == 0) return;
+    for(int i = 0; i < data.size(); i++){
+        if(data[i] == '\n'){
+            if(is_id == 1) {
+                is_id = 0;
+            }
+            else {
+                break;
+            }
+            continue;
+        }
+        if(is_id == 1) id_temp += data[i];
+        else name_temp += data[i];
+    }
+    id = id_temp;
+    name = name_temp;
+
+    qDebug() << id.c_str() << name.c_str();
+
+    thread_end();
 }
 
 int NetConnection::sendHealthData(int pulse, int max, int min, int spo2){
