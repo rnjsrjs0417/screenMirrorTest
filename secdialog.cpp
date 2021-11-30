@@ -20,7 +20,7 @@ SecDialog::SecDialog(QWidget *parent) :
 
     setWindowFlags(Qt::FramelessWindowHint);
 
-    net=new NetConnection(this,"125.6.37.219",&SecDialog::loginComplete2);
+    net=new NetConnection(this,"125.6.37.219");
 
     name[1] = ""; name[2] = ""; name[3] = "";
     id[1] = ""; id[2] = ""; id[3] = "";
@@ -38,10 +38,6 @@ SecDialog::~SecDialog()
 
 void SecDialog::loadUserInfo()
 {
-    //debug code
-//    name[1] = "은구"; name[2] = "+"; name[3] = "+";
-//    id[1] = "dmsrn135"; id[2] = ""; id[3] = "";
-
     //file input
     QFile file("C:\\Users\\kwang\\Documents\\screenMirrorTest\\userInfo.txt");
 
@@ -58,6 +54,9 @@ void SecDialog::loadUserInfo()
     name[3] = in.readLine();
     id[3] = in.readLine();
 
+    if(name[1] == "") name[1] = "+";
+    if(name[2] == "") name[2] = "+";
+    if(name[3] == "") name[3] = "+";
 
     //label set
 
@@ -112,7 +111,6 @@ void SecDialog::on_pushButton_3_clicked()
 {
      userNum = 3;
      login_select();
-
 }
 
 
@@ -120,42 +118,32 @@ void SecDialog::login_select()
 {
     if(name[userNum] == "+")
     {
-        qDebug() << "newcomer hi fuck";
         login_createAccount();
-
     }
     else
     {
-        qDebug() << "not newcomer hi sex";
         login_signIn();
     }
-
 }
 
 
 // if user
 void SecDialog::login_signIn()
 {
-//    MainWindow* m;
-//    m = new MainWindow();
-//    m->show();
-
     n=new MainWindow(this,net);
     n->show();
     n->sampling();
 
-
-    //net=new NetConnection(this,"125.6.37.219",&SecDialog::loginComplete2);
-    // net-> 한방에로그인( name[userNum] ) ;
+    net->load_user(name[userNum].toStdString(), &SecDialog::loginComplete2);
 
 }
 void SecDialog::loginComplete2(int a)
 {
     if(isNewcome == 1)//file modify
     {
-        //name[userNum] = newName;
-        //id[userNum] = newId;
-        //saveInfo();
+        name[userNum] = net->name.c_str();
+        id[userNum] = net->id.c_str();
+        saveUserInfo();
     }
     n->show();
     n->sampling();
@@ -184,10 +172,7 @@ void SecDialog::login_createAccount()
     pa2->start();
     // set page2
 
-
-    //net=new NetConnection(this,"125.6.37.219",&SecDialog::loginComplete);
-
-    QString m = QString::number(net->get_devicecode());
+    QString m = QString::number(net->get_devicecode(&SecDialog::loginComplete2));
     ui->pwd->setAlignment(Qt::AlignCenter);
     ui->pwd->setText(m);
 
