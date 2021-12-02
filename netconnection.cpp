@@ -3,6 +3,7 @@
 #include <netconnection.h>
 #include <recvthread.h>
 #include <secdialog.hpp>
+#include <mainwindow.h>
 
 #define HTTP_PORT 16002
 #define TCP_PORT 16005
@@ -43,7 +44,7 @@ int NetConnection::get_devicecode(void (SecDialog::*_callback)(int)){
 }
 
 void NetConnection::load_user(string mid, void (SecDialog::*_callback)(int)){
-    string q = "/validuser?id=" + mid;
+    string q = ":16002/validuser?id=" + mid;
     callback = _callback;
 
     string url = "http://" + server_url + q;
@@ -53,6 +54,20 @@ void NetConnection::load_user(string mid, void (SecDialog::*_callback)(int)){
 
     reply = manager->get(request);
     connect(reply, SIGNAL(readyRead()), this, SLOT(ready2read()));
+}
+
+void NetConnection::get_todo(MainWindow* w, void (MainWindow::*_callback)(int)){
+    string q = ":16002/getTodo?id=dmsrn135";
+    //string q = "/getTodo?id=" + id;
+    maincallback = _callback;
+    mainwindow = w;
+    string url = "http://" + server_url + q;
+    QUrl serviceURL(url.c_str());
+    QNetworkRequest request(serviceURL);
+
+    qDebug() << url.c_str();
+    reply = manager->get(request);
+    connect(reply, SIGNAL(finished()), this, SLOT(readytodo()));
 }
 
 int NetConnection::sendHealthData(int pulse, int max, int min, int spo2){
@@ -85,10 +100,12 @@ void NetConnection::ready2read(){
     auto value = object.value("result");
     bool result = value.toBool();
 
+    void(SecDialog::*pFunc)(int) = callback;
     if(result){
-        void(SecDialog::*pFunc)(int) = callback;
-
-        (window->*pFunc)(123);
+        (window->*pFunc)(0);
+    }
+    else{
+        (window->*pFunc)(-1);
     }
 //    QJsonValue value = object.value("agentsArray");
 //    QJsonArray array = value.toArray();
@@ -119,4 +136,26 @@ void NetConnection::ready2readCode(){
     qDebug() << id.c_str() << name.c_str();
 
     thread_end();
+}
+
+void NetConnection::readytodo(){
+    qDebug() << "test";
+    auto ret = reply->readAll();
+    qDebug() << ret;
+    QJsonDocument document = QJsonDocument::fromJson(ret);
+    QJsonObject object = document.object();
+
+    auto value = object.value("result");
+    auto result = value.toArray();
+
+    todo.clear();
+    qDebug() << result.size();
+    for(auto i = 0; i < result.size(); i++){
+       qDebug() << result.at(i);
+    }
+
+    void(MainWindow::*pFunc)(int) = maincallback;
+    (mainwindow->*pFunc)(123);
+//    QJsonValue value = object.value("agentsArray");
+//    QJsonArray array = value.toArray();
 }

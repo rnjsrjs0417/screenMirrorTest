@@ -39,7 +39,7 @@ SecDialog::~SecDialog()
 void SecDialog::loadUserInfo()
 {
     //file input
-    QFile file("C:\\Users\\kwang\\Documents\\screenMirrorTest\\userInfo.txt");
+    QFile file("C:\\swproject\\screenMirrorTest\\userInfo.txt");
 
     if( !file.open(QFile::ReadOnly | QFile::Text)){
         QMessageBox::warning(this,"title","file not open");
@@ -74,7 +74,7 @@ void SecDialog::loadUserInfo()
 
 void SecDialog::saveUserInfo()
 {
-    QFile file("C:\\Users\\kwang\\Documents\\screenMirrorTest\\userInfo.txt");
+    QFile file("C:\\swproject\\screenMirrorTest\\userInfo.txt");
 
     if( !file.open(QFile::WriteOnly | QFile::Text)){
         QMessageBox::warning(this,"title","file not open");
@@ -116,6 +116,7 @@ void SecDialog::on_pushButton_3_clicked()
 
 void SecDialog::login_select()
 {
+
     if(name[userNum] == "+")
     {
         login_createAccount();
@@ -130,12 +131,7 @@ void SecDialog::login_select()
 // if user
 void SecDialog::login_signIn()
 {
-    n=new MainWindow(this,net);
-    n->show();
-    n->sampling();
-
     net->load_user(name[userNum].toStdString(), &SecDialog::loginComplete2);
-
 }
 void SecDialog::loginComplete2(int a)
 {
@@ -145,8 +141,10 @@ void SecDialog::loginComplete2(int a)
         id[userNum] = net->id.c_str();
         saveUserInfo();
     }
+    n=new MainWindow(this,net);
     n->show();
     n->sampling();
+
 }
 
 
@@ -175,8 +173,6 @@ void SecDialog::login_createAccount()
     QString m = QString::number(net->get_devicecode(&SecDialog::loginComplete2));
     ui->pwd->setAlignment(Qt::AlignCenter);
     ui->pwd->setText(m);
-
-    n = new MainWindow(this,net);
 }
 
 void SecDialog::loginComplete(int a)

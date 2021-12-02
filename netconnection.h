@@ -3,15 +3,17 @@
 
 #include <QObject>
 #include <QtDebug>
-#include <map>
+#include <vector>
 #include <string>
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkRequest>
 #include <QtNetwork/QNetworkReply>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QJsonArray>
 
 class SecDialog;
+class MainWindow;
 
 class NetConnection : public QObject
 {
@@ -27,14 +29,17 @@ public:
     void thread_end();
     void load_user(std::string mid, void (SecDialog::*_callback)(int));
     void new_load_user(std::string mid);
+    void get_todo(MainWindow* w, void (MainWindow::*_callback)(int));
 
 public slots:
     void ready2read();
     void ready2readCode();
+    void readytodo();
 
 public:
     std::string id;
     std::string name;
+    std::vector<std::string> todo;
 
 private:
     void make_socket();
@@ -45,10 +50,12 @@ private:
 private:
     std::string server_url;
     SecDialog* window;
+    MainWindow* mainwindow;
     QTcpSocket* socket;
     QNetworkReply * reply;
     QNetworkAccessManager* manager;
     void (SecDialog::*callback)(int);
+    void (MainWindow::*maincallback)(int);
 
 };
 
