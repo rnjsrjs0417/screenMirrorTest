@@ -1,8 +1,7 @@
 #include <unistd.h>
 #include <cstdlib>
 #include <netconnection.h>
-#include <recvthread.h>
-#include <secdialog.hpp>
+#include <secdialog.h>
 #include <mainwindow.h>
 
 #define HTTP_PORT 16002
@@ -11,7 +10,7 @@ using namespace std;
 
 int i = 0 ;
 
-NetConnection::NetConnection(SecDialog* w, string server) : QObject(w){
+NetConnection::NetConnection(MainWindow* w, string server) : QObject(w){
     manager = new QNetworkAccessManager(this);
     server_url = server;
     window = w;
@@ -21,12 +20,12 @@ NetConnection::~NetConnection(){
 }
 
 void NetConnection::thread_end(){
-    void(SecDialog::*pFunc)(int) = callback;
+    void(MainWindow::*pFunc)(int) = callback;
 
-    (window->*pFunc)(123);
+    (window->*pFunc)(1);
 }
 
-int NetConnection::get_devicecode(void (SecDialog::*_callback)(int)){
+int NetConnection::get_devicecode(void (MainWindow::*_callback)(int)){
     char b[] = "device";
     callback = _callback;
 
@@ -43,7 +42,7 @@ int NetConnection::get_devicecode(void (SecDialog::*_callback)(int)){
     return atoi(str.toStdString().c_str());
 }
 
-void NetConnection::load_user(string mid, void (SecDialog::*_callback)(int)){
+void NetConnection::load_user(string mid, void (MainWindow::*_callback)(int)){
     string q = ":16002/validuser?id=" + mid;
     callback = _callback;
 
@@ -56,7 +55,7 @@ void NetConnection::load_user(string mid, void (SecDialog::*_callback)(int)){
     connect(reply, SIGNAL(readyRead()), this, SLOT(ready2read()));
 }
 
-void NetConnection::get_todo(MainWindow* w, void (MainWindow::*_callback)(int)){
+void NetConnection::get_todo(SecDialog* w, void (SecDialog::*_callback)(int)){
     string q = ":16002/getTodo?id=dmsrn135";
     //string q = "/getTodo?id=" + id;
     maincallback = _callback;
@@ -65,9 +64,19 @@ void NetConnection::get_todo(MainWindow* w, void (MainWindow::*_callback)(int)){
     QUrl serviceURL(url.c_str());
     QNetworkRequest request(serviceURL);
 
-    qDebug() << url.c_str();
     reply = manager->get(request);
     connect(reply, SIGNAL(finished()), this, SLOT(readytodo()));
+}
+
+void NetConnection::get_weather(SecDialog* w, void (SecDialog::*_callback)(int)){
+    string url = "http://api.openweathermap.org/data/2.5/onecall?appid=fb0500156646aeca750494a99d7d6447&lat=35.8&lon=128.55";
+    maincallback = _callback;
+    mainwindow = w;
+    QUrl serviceURL(url.c_str());
+    QNetworkRequest request(serviceURL);
+
+    reply = manager->get(request);
+    connect(reply, SIGNAL(finished()), this, SLOT(readyweather()));
 }
 
 int NetConnection::sendHealthData(int pulse, int max, int min, int spo2){
@@ -100,7 +109,7 @@ void NetConnection::ready2read(){
     auto value = object.value("result");
     bool result = value.toBool();
 
-    void(SecDialog::*pFunc)(int) = callback;
+    void(MainWindow::*pFunc)(int) = callback;
     if(result){
         (window->*pFunc)(0);
     }
@@ -130,8 +139,8 @@ void NetConnection::ready2readCode(){
         if(is_id == 1) id_temp += data[i];
         else name_temp += data[i];
     }
-    id = id_temp;
-    name = name_temp;
+    this->id = id_temp;
+    this->name = name_temp;
 
     qDebug() << id.c_str() << name.c_str();
 
@@ -139,23 +148,33 @@ void NetConnection::ready2readCode(){
 }
 
 void NetConnection::readytodo(){
-    qDebug() << "test";
     auto ret = reply->readAll();
-    qDebug() << ret;
     QJsonDocument document = QJsonDocument::fromJson(ret);
     QJsonObject object = document.object();
 
-    auto value = object.value("result");
+    auto value = object.value("value");
     auto result = value.toArray();
 
     todo.clear();
-    qDebug() << result.size();
+
     for(auto i = 0; i < result.size(); i++){
-       qDebug() << result.at(i);
+       todo.push_back(result.at(i).toObject().value("todo").toString().toStdString());
     }
 
-    void(MainWindow::*pFunc)(int) = maincallback;
+    void(SecDialog::*pFunc)(int) = maincallback;
     (mainwindow->*pFunc)(123);
-//    QJsonValue value = object.value("agentsArray");
-//    QJsonArray array = value.toArray();
+}
+
+void NetConnection::readyweather(){
+    auto ret = reply->readAll();
+    QJsonDocument document = QJsonDocument::fromJson(ret);
+    QJsonObject object = document.object();
+
+    auto cur = object.value("hourly").toArray().at(0).toObject();
+    temp = cur.value("temp").toDouble() - 273;
+    humidity = cur.value("humidity").toDouble();
+    rain = (int)(cur.value("pop").toDouble() * 100);
+
+    void(SecDialog::*pFunc)(int) = maincallback;
+    (mainwindow->*pFunc)(123);
 }

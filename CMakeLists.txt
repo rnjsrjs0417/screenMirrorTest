@@ -32,9 +32,9 @@ set(PROJECT_SOURCES
         mainwindow.ui
         netconnection.cpp
         netconnection.h
-        recvthread.cpp
-        recvthread.h
-        secdialog.hpp
+        samplingthread.h
+        samplingthread.cpp
+        secdialog.h
         secdialog.cpp
         secdialog.ui
 )
