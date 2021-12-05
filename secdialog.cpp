@@ -41,15 +41,14 @@ ui(new Ui::SecDialog)
         qDebug() << "hola has gone";
 
 
-    net->get_todo(this, &SecDialog::gotTodo);
+
 
 
     dateSet(ui);
     pixmapSet(ui);
     sampling();
+     net->get_todo(this, &SecDialog::gotTodo);
 
-
-    ui->page1->move(0,-500);
 }
 
 void SecDialog::myfunction() // Operates in every 1 sec
@@ -100,6 +99,9 @@ void SecDialog::myfunction() // Operates in every 1 sec
     ui->label_3->setText(QString::number(spo2));
     ui->label_5->setText(QString::number(minpress));
     ui->label_20->setText(QString::number(maxpress));
+
+
+    net->get_todo(this, &SecDialog::gotTodo);
 }
 
 void SecDialog::onMouseEvent( const QPoint &pos) //

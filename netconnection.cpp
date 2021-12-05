@@ -122,6 +122,13 @@ void NetConnection::ready2read(){
 
 void NetConnection::ready2readCode(){
     QString data_ = socket->readAll();
+    qDebug() << id.c_str() << name.c_str();
+
+    thread_end();
+}
+
+void NetConnection::readytodo(){
+    auto ret = reply->readAll();
     string data = data_.toStdString();
     int is_id = 1;
     string id_temp, name_temp;
@@ -142,13 +149,6 @@ void NetConnection::ready2readCode(){
     this->id = id_temp;
     this->name = name_temp;
 
-    qDebug() << id.c_str() << name.c_str();
-
-    thread_end();
-}
-
-void NetConnection::readytodo(){
-    auto ret = reply->readAll();
     QJsonDocument document = QJsonDocument::fromJson(ret);
     QJsonObject object = document.object();
 
@@ -172,8 +172,9 @@ void NetConnection::readyweather(){
     QJsonDocument document = QJsonDocument::fromJson(ret);
     QJsonObject object = document.object();
 
-    auto cur = object.value("hourly").toArray().at(0).toObject();
+    auto cur = object.value("daily").toArray().at(0).toObject();
     temp = cur.value("temp").toDouble() - 273;
+    temp = 8;
     humidity = cur.value("humidity").toDouble();
     rain = (int)(cur.value("pop").toDouble() * 100);
 
